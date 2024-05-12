@@ -14,6 +14,12 @@
   <!-- Flowbite -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
+  <!-- Animate On Scroll -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Alpine.js -->
+  <script src="//unpkg.com/alpinejs" defer></script>
+
   <!-- Google Font - Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,9 +51,9 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
         <ul
           class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
-          <li>
-            <a href="#service" class="block py-2 px-3 text-white hover:text-[#9F30D4] md:p-0"
-              aria-current="page">Service</a>
+          <li x-data="{klik: false}">
+            <a href="#service" class="block py-2 px-3 text-white hover:text-[#9F30D4] md:p-0" aria-current="page"><span
+                @click="klik = !klik" x-bind:class="klik ? 'text-[#9F30D4]' : 'text-white'">Service</span></a>
           </li>
           <li>
             <a href="#project" class="block py-2 px-3 text-white hover:text-[#9F30D4] md:p-0">Project</a>
@@ -83,7 +89,7 @@
         Download CV
       </a>
     </div>
-    <div class="col pe-2">
+    <div class="col pe-2" data-aos="fade-up" data-aos-duration="1000">
       <img src="dist/img/profil.png" alt="Profil" class="w-36 sm:w-64 md:w-80 xl:w-[30rem]" />
       <div
         class="w-36 sm:w-64 md:w-80 xl:w-[30rem] h-10 xl:h-20 bg-gradient-to-br from-[#3F59E1] to-[#9F30D4] rounded-full flex justify-center items-center">
@@ -104,7 +110,8 @@
   </div>
 
   <div class="text-white mt-16 flex justify-center gap-10">
-    <img src="dist/img/front-end.png" alt="Front-End Web Development" class="w-36 md:w-80 ps-8 sm:ps-0" />
+    <img src="dist/img/front-end.png" alt="Front-End Web Development" class="w-36 md:w-80 ps-8 sm:ps-0"
+      data-aos="fade-up" data-aos-duration="1000" />
     <div class="">
       <h3 class="w-40 font-medium my-2 text-[14px] sm:text-lg md:text-xl xl:text-2xl">
         Front-End Web Development
@@ -130,7 +137,8 @@
         <li>Logo Design</li>
       </ul>
     </div>
-    <img src="dist/img/designer.png" alt="Front-End Web Development" class="w-40 md:w-80" />
+    <img src="dist/img/designer.png" alt="Front-End Web Development" class="w-40 md:w-80" data-aos="fade-up"
+      data-aos-duration="1000" />
   </div>
   <!-- End Service -->
 
@@ -145,7 +153,7 @@
   <div class="flex justify-center">
     <div class="row px-4 lg:flex lg:justify-center lg:gap-5">
       <!-- PT Moemtaz Group International -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-16 h-[32rem]">
           <a href="https://moemtazgroup.com/" target="_blank">
             <img class="rounded-t-lg" src=" dist/project/cp-moemtaz.png" alt="" />
@@ -181,7 +189,7 @@
         </div>
       </div>
       <!-- At-Tasawuq -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm h-[32rem] bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4 lg:mt-16">
           <a href="dist/file/ui-design-at-tasawuq.pdf" target="_blank">
             <img class="rounded-t-lg" src="dist/project/ui-design-1.png" alt="At Tasawuq" />
@@ -212,7 +220,7 @@
         </div>
       </div>
       <!-- GadgetIndo -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm h-[32rem] bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4 lg:mt-16">
           <a href="https://www.instagram.com/gadgetindocom?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank">
@@ -254,7 +262,7 @@
   <div class="flex justify-center">
     <div class="row px-4 lg:flex lg:justify-center lg:gap-5">
       <!-- Wedding Invitation -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm bg-black border-2 border-[#9F30D4] shadow mt-4
         h-[32rem] rounded-lg">
           <a href="https://wedding-invitation-six-mu.vercel.app/" target="_blank">
@@ -288,7 +296,7 @@
         </div>
       </div>
       <!-- Music App -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm h-[32rem] bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4">
           <a href="dist/file/music-app.pdf" target="_blank">
             <img class="rounded-t-lg" src="dist/project/music-app.png" alt="Music App" />
@@ -320,7 +328,7 @@
         </div>
       </div>
       <!-- Ahli Surga -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm h-[32rem] bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4">
           <a href="https://youtube.com/@AhliSurga1?si=ihf31WcFpGZXvFhp" target="_blank">
             <img class="rounded-t-lg" src="dist/project/ahli-surga.png" alt="Ahli Surga" />
@@ -370,7 +378,7 @@
   <div class="flex justify-center">
     <div class="row px-4 lg:flex lg:justify-center lg:gap-5">
       <!-- JWD - BNSP -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-16">
           <a href="dist/file/Certificate Of Competence - BNSP.pdf" target="_blank">
             <img class="rounded-t-lg" src="dist/certificate/bnsp.png" alt="BNSP JWD" />
@@ -405,7 +413,7 @@
         </div>
       </div>
       <!-- JWD - Digitalent KOMINFO -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4 lg:mt-16">
           <a href="dist/file/Sertifikat_SYARIF HIDAYATULLAH_Junior Web Developer.pdf" target="_blank">
             <img class="rounded-t-lg" src="dist/certificate/jwd-vsga.png" alt="JWD VSGA" />
@@ -440,7 +448,7 @@
         </div>
       </div>
       <!-- PT Kawan Kerja Indonesia - Grapich Design -->
-      <div class="col">
+      <div class="col" data-aos="fade-up" data-aos-duration="1000">
         <div class="max-w-sm bg-black border-2 border-[#9F30D4] rounded-lg shadow mt-4 lg:mt-16">
           <a href="dist/file/Sertifikat Grapich Design Kawan Kerja.pdf" target="_blank">
             <img class="rounded-t-lg" src="dist/certificate/kawan-kerja.png" alt="Grapich Design Internship" />
@@ -536,8 +544,27 @@
   </div>
   <!-- End Footer -->
 
+  <!-- Back to Top -->
+  <a href="#home" x-data="{ showButton: false }" @scroll.window="showButton = window.pageYOffset > 30"
+    x-show="showButton" x-transition:enter="enter" x-transition:leave="leave"
+    @click="window.scrollTop({top: 0, behavior: 'smooth'})"
+    class="fixed bottom-10 right-10 w-10 h-10 rounded-full bg-gradient-to-r from-[#3F59E1] to-[#9F30D4] hover:scale-105 hover:transition">
+    <button class="block pt-2 ps-2 cursor-pointer">
+      <img src="dist/img/gg_push-up.png" alt="Back To Top">
+    </button>
+  </a>
+
   <!-- Flowbite -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+  <!-- Animate On Scroll -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true
+    });
+  </script>
+
 </body>
 
 </html>
