@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="src/output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-sm fixed z-10">
+      <div class="navbar-start">
+        <div class="dropdown">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+          >
+            <li><a href="#homepage">Home</a></li>
+            <li><a href="#certificate">Certificate</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#project">Project</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="navbar-center">
+        <a class="btn btn-ghost text-sm sm:text-xl">Syarif Hidayatullah</a>
+      </div>
+      <div class="navbar-end">
+        <a
+          href="dist/file/CV Syarif Hidayatullah Vol 4.pdf"
+          target="_blank"
+          class="btn rounded-xl text-xs sm:text-sm"
+          >Curriculum Vitae</a
+        >
+      </div>
+    </div>
+    <!-- ./Navbar -->
+
+    <!-- Hero -->
+    <div class="hero bg-base-200 min-h-screen" id="homepage">
+      <div class="hero-content flex-col lg:flex-row mt-14 lg:mt-0">
+        <img src="dist/img/pp.jpg" class="max-w-xs rounded-lg shadow-2xl" />
+        <div>
+          <h1 class="text-2xl lg:text-4xl font-bold">Junior Web Developer</h1>
+          <h1 class="text-2xl lg:text-4xl font-bold">UI/UX Designer</h1>
+          <p class="py-6 font-light lg:text-lg">
+            Hi, I am a student who has skills in UI Design and Front-End Web
+            Development, I got those skills through studying. Because I want to
+            have a good future I have to keep learning so that all my goals are
+            realized.
+          </p>
+          <a
+            href="https://wa.me/6282133223201"
+            target="_blank"
+            class="bg-emerald-500 px-4 py-2 rounded"
+            >Say Hello 👋</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- ./Hero -->
+
+    <!-- Cerificate -->
+    <div id="certificate">
+      <h1 class="text-center mb-5 text-2xl font-bold pt-18">Certificate</h1>
+      <div
+        class="carousel carousel-center rounded-box max-w-full space-x-4 p-4"
+      >
+        <div class="carousel-item">
+          <a href="pages/codepolitan.html">
+            <img src="dist/img/Codepolitan.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/dicoding.html">
+            <img src="dist/img/Dicoding.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/bnsp.html">
+            <img src="dist/img/BNSP.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/alibaba.html">
+            <img src="dist/img/Alibaba Cloud.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/gdsc.html">
+            <img src="dist/img/GDSC.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/prakerja.html">
+            <img src="dist/img/Prakerja.jpg" class="rounded-box" />
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="pages/unpam.html">
+            <img src="dist/img/Unpam.jpg" class="rounded-box" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- ./Cerificate -->
+
+    <!-- Skills -->
+    <div id="skills">
+      <h1 class="text-center my-5 text-2xl font-bold pt-18">Skills</h1>
+      <div class="overflow-x-auto">
+        <table class="table max-w-4xl mx-auto">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Technology</th>
+              <th>Range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            <tr>
+              <th>1</th>
+              <td>HTML</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="80"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 2 -->
+            <tr>
+              <th>2</th>
+              <td>CSS</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="85"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 3 -->
+            <tr>
+              <th>3</th>
+              <td>Javascript</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="70"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 4 -->
+            <tr>
+              <th>4</th>
+              <td>React</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="20"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 5 -->
+            <tr>
+              <th>5</th>
+              <td>Laravel</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="30"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 6 -->
+            <tr>
+              <th>6</th>
+              <td>Tailwind CSS</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="75"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+            <!-- row 7 -->
+            <tr>
+              <th>7</th>
+              <td>Figma</td>
+              <td>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="95"
+                  class="range range-xs"
+                  disabled
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- ./Skills -->
+
+    <!-- Project -->
+    <div id="project">
+			<h1 class="text-center mb-5 text-2xl font-bold pt-18">Project</h1>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 place-items-center"
+      >
+        <!-- Card 1 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/bigonecoffee.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Big One Coffee & Eatery</h2>
+            <p>
+              Aplikasi berbasis website untuk pemesanan menu di cafe Big One Coffee & Eatery.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="https://bigonecoffee.site/pesan/" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/flappybird.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Flappy Bird</h2>
+            <p>
+              Permainan sederhana Flappy Bird.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="https://flappy-bird-five-flame.vercel.app/" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/kopianaksenja.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Kedai Kopi Anak Senja</h2>
+            <p>
+              Latihan membuat website dengan menggunakan Tailwind CSS.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="https://kedai-kopi-anak-senja.vercel.app/" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/at-tasawuq.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">At Tasawuq</h2>
+            <p>
+              Desain aplikasi e-commerce.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="dist/file/ui-design-at-tasawuq.pdf" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/music-app.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Music App</h2>
+            <p>
+              Desain aplikasi mobile untuk music app.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="dist/file/music-app.pdf" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="card bg-base-100 w-80 sm:w-100 shadow-sm">
+          <figure>
+            <img
+              src="dist/img/numisnest.jpg"
+              alt="Shoes"
+            />
+          </figure>
+          <div class="card-body">
+            <h2 class="card-title">Numisnest</h2>
+            <p>
+              Desain aplikasi mobile Numisnest.
+            </p>
+            <div class="card-actions justify-end">
+              <a href="dist/file/Demo - Prototyping - Mobile.mp4" target="_blank" class="bg-emerald-500 py-2 px-4 rounded hover:bg-emerald-100 hover:text-slate-700">Visit</a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+    <!-- ./Project -->
+
+		<!-- Footer -->
+		<footer class="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+			<nav>
+				<h6 class="footer-title">Menu</h6>
+				<a href="#homepage" class="link link-hover">Home</a>
+				<a href="#certificate" class="link link-hover">Certificate</a>
+				<a href="#skills" class="link link-hover">Skills</a>
+				<a href="#project" class="link link-hover">Project</a>
+			</nav>
+			<nav>
+				<h6 class="footer-title">Social</h6>
+				<a href="https://www.instagram.com/_dunaman/" target="_blank" class="link link-hover">Instagram</a>
+				<a href="https://github.com/Dunaman10" target="_blank" class="link link-hover">Github</a>
+				<a href="https://www.linkedin.com/in/syarif-hidayatullah-0b5069236/" target="_blank" class="link link-hover">LinkedIn</a>
+				<a href="https://www.facebook.com/profile.php?id=100006198693504&locale=id_ID" target="_blank" class="link link-hover">Facebook</a>
+			</nav>
+		</footer>
+		<!-- ./Footer -->
+  </body>
+</html>
