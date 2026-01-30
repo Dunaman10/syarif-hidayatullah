@@ -179,7 +179,7 @@ const Home = () => {
 
             {/* Heading */}
             <div className="mb-6">
-              <h1 className="heading-display text-3xl sm:text-4xl lg:text-6xl text-[var(--color-text-primary)] leading-tight mb-4">
+              <h1 className="heading-display text-3xl sm:text-4xl lg:text-6xl text-[var(--color-text-primary)] leading-tight mb-4 min-h-[7rem] sm:min-h-[7.5rem] lg:min-h-[5rem] flex items-center justify-center lg:justify-start">
                 <span ref={textRef} className="text-gradient"></span>
                 <span
                   ref={cursorRef}

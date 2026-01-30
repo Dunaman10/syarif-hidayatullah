@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Import Laravel logo
+// Import logos
 import LaravelLogo from "../assets/laravel-logo.png";
+import GsapLogo from "../assets/gsap-logo.png";
+import VueLogo from "../assets/vue-logo.png";
+import PhpLogo from "../assets/php-logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -82,10 +85,7 @@ const skillIcons = {
     </svg>
   ),
   PHP: (
-    <svg viewBox="0 0 128 128" width="24" height="24">
-      <path fill="#6181B6" d="M64 33.039C30.26 33.039 2.906 46.901 2.906 64S30.26 94.961 64 94.961 125.094 81.099 125.094 64 97.74 33.039 64 33.039zM48.103 70.032c-1.458 1.364-3.077 1.927-4.86 2.507-1.783.581-4.052.461-6.811.461h-6.253l-1.733 10h-7.301l6.515-34H41.7c4.224 0 7.305 1.215 9.242 3.432 1.937 2.217 2.519 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515-.759 1.357-1.75 2.624-2.972 3.748zm21.311 0c-1.458 1.364-3.078 1.927-4.86 2.507-1.782.581-4.053.461-6.812.461h-6.253l-1.732 10h-7.301l6.514-34h14.041c4.224 0 7.305 1.215 9.241 3.432 1.938 2.217 2.52 5.364 1.747 9.337-.319 1.637-.856 3.159-1.614 4.515a13.842 13.842 0 01-2.971 3.748zm40.478-5.077c-.36 1.797-.963 3.41-1.765 4.842-.803 1.433-1.886 2.671-3.207 3.717-1.323 1.048-3.02 1.677-5.093 1.859-.748.061-1.39.091-1.921.091h-6.253l-1.733 10h-7.301l6.515-34h14.041c2.195 0 4.018.367 5.469 1.103 1.452.737 2.513 1.813 3.187 3.227s.898 3.092.672 5.029l-.069.473c-.165.823-.41 1.636-.735 2.441-.325.805-.724 1.584-1.193 2.334-.47.75-1.019 1.462-1.647 2.134a11.014 11.014 0 01-2.101 1.757l-.869.588c-.295.187-.61.358-.944.508-.335.151-.687.283-1.053.395z"/>
-      <path fill="#fff" d="M39.068 50H31.2l-3.5 16h6.086c2.894 0 5.27-.574 7.035-1.725 1.766-1.15 2.97-3.308 3.464-6.464.36-2.291.136-3.869-.67-4.736-.806-.866-2.453-1.075-5.547-1.075zm21.311 0H52.51l-3.5 16h6.086c2.894 0 5.27-.574 7.035-1.725 1.765-1.15 2.969-3.308 3.463-6.464.36-2.291.136-3.869-.67-4.736-.806-.866-2.453-1.075-5.546-1.075zm38.455 0h-7.867l-3.5 16h6.086c2.894 0 5.27-.574 7.035-1.725 1.765-1.15 2.969-3.308 3.463-6.464.36-2.291.136-3.869-.67-4.736-.806-.866-2.452-1.075-5.547-1.075z"/>
-    </svg>
+    <img src={PhpLogo} alt="PHP" width="24" height="24" style={{ objectFit: 'contain' }} />
   ),
   Node: (
     <svg viewBox="0 0 128 128" width="24" height="24">
@@ -93,11 +93,10 @@ const skillIcons = {
     </svg>
   ),
   GSAP: (
-    <svg viewBox="0 0 100 100" width="24" height="24">
-      <circle cx="50" cy="50" r="48" fill="#0ae448"/>
-      <path fill="#000" d="M50 10c22.091 0 40 17.909 40 40S72.091 90 50 90 10 72.091 10 50s17.909-40 40-40zm0 5c-19.33 0-35 15.67-35 35s15.67 35 35 35 35-15.67 35-35-15.67-35-35-35z"/>
-      <text x="50" y="58" textAnchor="middle" fill="#000" fontWeight="bold" fontSize="20" fontFamily="Arial">GS</text>
-    </svg>
+    <img src={GsapLogo} alt="GSAP" width="24" height="24" style={{ objectFit: 'contain' }} />
+  ),
+  "Vue.js": (
+    <img src={VueLogo} alt="Vue.js" width="24" height="24" style={{ objectFit: 'contain' }} />
   ),
 };
 
@@ -108,6 +107,7 @@ const Skills = () => {
 
   const skills = [
     { name: "React", icon: skillIcons.React },
+    { name: "Vue.js", icon: skillIcons["Vue.js"] },
     { name: "Next.js", icon: skillIcons["Next.js"] },
     { name: "JavaScript", icon: skillIcons.JavaScript },
     { name: "Laravel", icon: skillIcons.Laravel },

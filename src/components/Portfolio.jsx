@@ -8,6 +8,9 @@ import CuteTopup from "../assets/portfolio/cute-topup.jpg";
 import HouseSpace from "../assets/portfolio/housespace.jpg";
 import KopiAnakSenja from "../assets/portfolio/kopi-anak-senja.jpg";
 import CekCrypto from "../assets/portfolio/cekcrypto.jpg";
+import Daruttafsir from "../assets/portfolio/daruttafsir.png";
+import CateringMama from "../assets/portfolio/catering-mama.png";
+import AmirElixir from "../assets/portfolio/amir-elixir.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +29,36 @@ const Portfolio = () => {
     // Web Development Projects
     {
       id: 1,
+      title: "Daruttafsir",
+      description:
+        "Modern Islamic education website for Pondok Pesantren Darut Tafsir featuring Quranic studies, facilities showcase, and student enrollment system.",
+      image: Daruttafsir,
+      category: "web",
+      tech: ["Laravel", "Tailwind CSS", "MySQL"],
+      link: "https://daruttafsir.santriqu.id/",
+    },
+    {
+      id: 2,
+      title: "Catering Mama",
+      description:
+        "Professional catering service website offering authentic Indonesian home-cooked meals with online ordering and delivery service.",
+      image: CateringMama,
+      category: "web",
+      tech: ["WordPress", "Elementor", "CSS"],
+      link: "https://catering-mama.netlify.app/",
+    },
+    {
+      id: 3,
+      title: "Amir Elixir",
+      description:
+        "Luxury perfume e-commerce platform with premium design, featuring product catalog from Contentful CMS and elegant user experience.",
+      image: AmirElixir,
+      category: "web",
+      tech: ["React", "Vite", "Contentful CMS"],
+      link: "https://amirperfume.edgeone.dev/",
+    },
+    {
+      id: 4,
       title: "Movientory",
       description:
         "A movie discovery platform that allows users to search through thousands of movies and explore trending titles.",
@@ -35,7 +68,7 @@ const Portfolio = () => {
       link: "https://movientory.vercel.app/",
     },
     {
-      id: 2,
+      id: 5,
       title: "Trendy Wear",
       description:
         "A modern and stylish e-commerce landing page for a clothing brand with premium aesthetics.",
@@ -45,7 +78,7 @@ const Portfolio = () => {
       link: "https://trendy-wear.vercel.app/",
     },
     {
-      id: 3,
+      id: 6,
       title: "Wedding Invitation",
       description:
         "A digital wedding invitation template featuring interactive elements and elegant design.",
@@ -55,7 +88,7 @@ const Portfolio = () => {
       link: "https://wedding-invitation-six-mu.vercel.app/",
     },
     {
-      id: 4,
+      id: 7,
       title: "Company Profile",
       description:
         "A professional corporate landing page showcasing services, portfolio, and contact sections.",
@@ -65,7 +98,7 @@ const Portfolio = () => {
       link: "https://company-profile-dusky.vercel.app/",
     },
     {
-      id: 5,
+      id: 8,
       title: "Flappy Bird Game",
       description:
         "A web-based recreation of the classic Flappy Bird game with additional cheat features.",
@@ -76,7 +109,7 @@ const Portfolio = () => {
     },
     // UI/UX Design Projects
     {
-      id: 6,
+      id: 9,
       title: "At-Tasawuq",
       description:
         "E-Commerce mobile app UI design for a shoes marketplace with modern product display and seamless shopping experience.",
@@ -86,7 +119,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 7,
+      id: 10,
       title: "Cute Top Up",
       description:
         "Gaming top-up mobile app design featuring popular games like Mobile Legends, PUBG, Free Fire, and Honor of Kings.",
@@ -96,7 +129,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 8,
+      id: 11,
       title: "HouseSpace",
       description:
         "Real estate website design with property search functionality for finding homes, apartments, and residential properties.",
@@ -106,7 +139,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 9,
+      id: 12,
       title: "Kopi Anak Senja",
       description:
         "Coffee shop website with warm aesthetics, featuring menu showcase and beautiful landing page.",
@@ -116,7 +149,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 10,
+      id: 13,
       title: "CekCrypto",
       description:
         "Cryptocurrency market platform for tracking Bitcoin, Ethereum and other crypto prices with real-time data.",
