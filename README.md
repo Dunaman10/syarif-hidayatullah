@@ -33,7 +33,6 @@ A modern, high-performance personal portfolio website built with **React 19**, *
 | 🧭 **Smart Navbar** | Floating navbar with active section detection, smooth underline transitions, and mobile hamburger menu |
 | 💼 **Portfolio Showcase** | Filterable project gallery with pagination, category tabs (Web Dev / UI-UX), and hover interactions |
 | 📜 **Certificate Collection** | 50+ certificates from 5+ institutions with dedicated detail pages and PDF viewing |
-| 🎯 **Scroll-to-Top Button** | Mobile-only floating button with glassmorphism style, appears on scroll |
 | 🔗 **Contact Integration** | Direct email link, social media icons, and "Available for Work" status indicator |
 
 ---

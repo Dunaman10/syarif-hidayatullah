@@ -323,21 +323,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Mobile Scroll-to-Top Button */}
-      <button
-        onClick={(e) => handleNavClick(e, "home")}
-        className={`sm:hidden fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-[rgba(255,255,255,0.08)] backdrop-blur-xl border border-[rgba(255,255,255,0.1)] text-[var(--color-text-secondary)] flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.3)] transition-all duration-300 ${
-          scrolled
-            ? "opacity-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 translate-y-4 pointer-events-none"
-        }`}
-        aria-label="Scroll to top"
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M18 15l-6-6-6 6" />
-        </svg>
-      </button>
     </>
   );
 };
