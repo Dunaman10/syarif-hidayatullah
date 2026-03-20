@@ -23,7 +23,7 @@ const Footer = () => {
           start: "top 90%",
           toggleActions: "play none none reverse",
         },
-      }
+      },
     );
   }, []);
 
@@ -34,7 +34,14 @@ const Footer = () => {
       name: "Instagram",
       url: "https://www.instagram.com/_dunaman",
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
           <rect x="2" y="2" width="20" height="20" rx="5" />
           <circle cx="12" cy="12" r="4" />
           <circle cx="18" cy="6" r="1.5" fill="currentColor" />
@@ -72,13 +79,21 @@ const Footer = () => {
       name: "Fiverr",
       url: "https://www.fiverr.com/s/jjzVY3m",
       icon: (
-        <img src={LogoFiverr} alt="Fiverr" className="w-[26px] h-[26px] object-contain brightness-0 invert opacity-[0.40] group-hover:opacity-100 transition-opacity" />
+        <img
+          src={LogoFiverr}
+          alt="Fiverr"
+          className="w-[26px] h-[26px] object-contain brightness-0 invert opacity-[0.40] group-hover:opacity-100 transition-opacity"
+        />
       ),
     },
   ];
 
   return (
-    <footer id="footer" ref={footerRef} className="footer relative pt-20 pb-8 px-5 sm:px-10">
+    <footer
+      id="footer"
+      ref={footerRef}
+      className="footer relative pt-20 pb-8 px-5 sm:px-10"
+    >
       {/* Background decoration */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 max-w-4xl rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-[100px]" />
 
@@ -87,7 +102,7 @@ const Footer = () => {
         <div className="glass-card p-10 sm:p-14 md:p-20 relative overflow-hidden group mb-12">
           {/* Subtle BG flare */}
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#e4e4e7] opacity-[0.02] blur-[100px] rounded-full pointer-events-none transition-opacity duration-700 group-hover:opacity-[0.04]" />
-          
+
           <div className="relative z-10 flex flex-col items-start gap-8">
             <div className="flex items-center gap-3">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#1dbf73] shadow-[0_0_12px_rgba(29,191,115,0.8)] animate-pulse" />
@@ -104,19 +119,45 @@ const Footer = () => {
                 Let's make it sleek
               </h2>
             </div>
-            
+
             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 sm:gap-6 mt-4">
-              <a href="mailto:shidayatullah481@gmail.com" className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-[#e4e4e7] hover:bg-white text-black rounded-full font-bold text-[17px] transition-transform hover:-translate-y-1 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(228,228,231,0.2)]">
+              <a
+                href="mailto:shidayatullah481@gmail.com"
+                className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-[#e4e4e7] hover:bg-white text-black rounded-full font-bold text-[17px] transition-transform hover:-translate-y-1 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(228,228,231,0.2)]"
+              >
                 Message Me
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M5 12h14"></path>
                   <path d="M12 5l7 7-7 7"></path>
                 </svg>
               </a>
-              
-              <a href="https://www.fiverr.com/s/jjzVY3m" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 py-3.5 sm:py-4 text-[var(--color-text-secondary)] hover:text-white font-semibold text-[17px] transition-colors flex items-center justify-center gap-3">
+
+              <a
+                href="https://www.fiverr.com/s/jjzVY3m"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3.5 sm:py-4 text-[var(--color-text-secondary)] hover:text-white font-semibold text-[17px] transition-colors flex items-center justify-center gap-3"
+              >
                 Go to My Fiverr
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
                   <path d="M5 12h14"></path>
                   <path d="M12 5l7 7-7 7"></path>
                 </svg>
@@ -132,32 +173,20 @@ const Footer = () => {
           </p>
           <div className="flex items-center gap-5 sm:gap-6">
             {socialLinks.map((social) => (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-muted)] hover:text-white transition-colors group flex items-center justify-center p-0" aria-label={social.name}>
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--color-text-muted)] hover:text-white transition-colors group flex items-center justify-center p-0"
+                aria-label={social.name}
+              >
                 {social.icon}
               </a>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Scroll to top button */}
-      <button
-        onClick={() => gsap.to(window, { duration: 1, scrollTo: 0, ease: "power3.inOut" })}
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full glass flex items-center justify-center hover:bg-[var(--color-accent)] text-[var(--color-text-secondary)] hover:text-[var(--color-bg-primary)] transition-all duration-300 group z-50"
-        aria-label="Scroll to top"
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          className="transition-transform group-hover:-translate-y-1"
-        >
-          <path d="M18 15L12 9L6 15" />
-        </svg>
-      </button>
     </footer>
   );
 };
