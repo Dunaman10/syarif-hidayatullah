@@ -46,8 +46,8 @@ const skillIcons = {
   ),
   "Next.js": (
     <svg viewBox="0 0 128 128" width="24" height="24">
-      <circle cx="64" cy="64" r="64" fill="currentColor"/>
-      <path fill="#0a0a0f" d="M106.317 112.014L49.167 38.4H38.4v51.179h8.614v-40.24l52.786 67.869a64.216 64.216 0 006.517-5.194zM81.778 38.4h8.533v51.2h-8.533z"/>
+      <circle cx="64" cy="64" r="64" fill="#ffffff"/>
+      <path fill="#000000" d="M106.317 112.014L49.167 38.4H38.4v51.179h8.614v-40.24l52.786 67.869a64.216 64.216 0 006.517-5.194zM81.778 38.4h8.533v51.2h-8.533z"/>
     </svg>
   ),
   Laravel: (
@@ -105,29 +105,20 @@ const Skills = () => {
   const headingRef = useRef(null);
   const badgesRef = useRef([]);
 
-  const skills = [
-    { name: "React", icon: skillIcons.React },
-    { name: "Vue.js", icon: skillIcons["Vue.js"] },
-    { name: "Next.js", icon: skillIcons["Next.js"] },
-    { name: "JavaScript", icon: skillIcons.JavaScript },
+  const skillsList = [
     { name: "Laravel", icon: skillIcons.Laravel },
-    { name: "Tailwind CSS", icon: skillIcons["Tailwind CSS"] },
-    { name: "GSAP", icon: skillIcons.GSAP },
-    { name: "Node.js", icon: skillIcons.Node },
-    { name: "Alpine.js", icon: skillIcons["Alpine.js"] },
-    { name: "HTML5", icon: skillIcons.HTML5 },
-    { name: "CSS3", icon: skillIcons.CSS3 },
-    { name: "Figma", icon: skillIcons.Figma },
+    { name: "Next.js", icon: skillIcons["Next.js"] },
+    { name: "React JS", icon: skillIcons.React },
+    { name: "Vue.js", icon: skillIcons["Vue.js"] },
     { name: "Git", icon: skillIcons.Git },
-    { name: "MySQL", icon: skillIcons.MySQL },
-    { name: "PHP", icon: skillIcons.PHP },
+    { name: "Figma", icon: skillIcons.Figma },
   ];
 
   useEffect(() => {
     // Heading animation
     gsap.fromTo(
       headingRef.current,
-      { opacity: 0, y: 60 },
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
@@ -136,65 +127,58 @@ const Skills = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 80%",
-          toggleActions: "play none none reverse",
         },
       }
     );
 
-    // Badges stagger animation
+    // Bento Cards stagger animation
     gsap.fromTo(
       badgesRef.current.filter(Boolean),
-      { opacity: 0, y: 40, scale: 0.9 },
+      { opacity: 0, y: 50 },
       {
         opacity: 1,
         y: 0,
-        scale: 1,
-        duration: 0.6,
-        stagger: { each: 0.06, from: "start" },
+        duration: 0.8,
+        stagger: 0.15,
         ease: "power3.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
-          toggleActions: "play none none reverse",
         },
       }
     );
-
-    // Hover magnetic effect
-    badgesRef.current.forEach((badge) => {
-      if (!badge) return;
-
-      const handleMouseMove = (e) => {
-        const rect = badge.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-
-        gsap.to(badge, {
-          x: x * 0.15,
-          y: y * 0.15,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      };
-
-      const handleMouseLeave = () => {
-        gsap.to(badge, {
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          ease: "elastic.out(1, 0.5)",
-        });
-      };
-
-      badge.addEventListener("mousemove", handleMouseMove);
-      badge.addEventListener("mouseleave", handleMouseLeave);
-
-      return () => {
-        badge.removeEventListener("mousemove", handleMouseMove);
-        badge.removeEventListener("mouseleave", handleMouseLeave);
-      };
-    });
   }, []);
+
+  // 3D Tilt Effect Handlers for Bento Cards
+  const handleMouseMove = (e, idx) => {
+    const card = badgesRef.current[idx];
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xPct = (x / rect.width) - 0.5;
+    const yPct = (y / rect.height) - 0.5;
+    
+    gsap.to(card, {
+      rotateY: xPct * 8, // subtle rotation
+      rotateX: -yPct * 8,
+      transformPerspective: 1200,
+      ease: "power2.out",
+      duration: 0.4,
+    });
+  };
+
+  const handleMouseLeave = (idx) => {
+    const card = badgesRef.current[idx];
+    if (!card) return;
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      ease: "power3.out",
+      duration: 1,
+    });
+  };
 
   return (
     <section
@@ -202,45 +186,55 @@ const Skills = () => {
       ref={sectionRef}
       className="relative py-24 px-5 sm:px-10 overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full bg-[var(--color-cyan)] opacity-[0.03] blur-3xl" />
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
         <div ref={headingRef} className="mb-16">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[var(--color-accent)] text-sm font-medium tracking-wider uppercase">
               My Expertise
             </span>
-            <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
+            <div className="h-px w-24 bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
           </div>
-          <h2 className="heading-display text-3xl sm:text-4xl lg:text-5xl text-[var(--color-text-primary)]">
-            Skills & <span className="text-gradient">Technologies</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--color-text-primary)] tracking-tight">
+            Web Development & <span className="text-[var(--color-accent)]">Design</span>
           </h2>
-          <p className="mt-4 text-[var(--color-text-secondary)] max-w-xl">
-            A collection of technologies and tools I've mastered throughout my
-            journey in web development and design.
+          <p className="mt-4 text-[var(--color-text-secondary)] text-lg max-w-xl">
+            A solid toolkit of modern technologies I use to craft high-performance digital experiences.
           </p>
         </div>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {skills.map((skill, index) => (
+        {/* Bento Box Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" style={{ perspective: "1500px" }}>
+          {skillsList.map((skill, idx) => (
             <div
               key={skill.name}
-              ref={(el) => (badgesRef.current[index] = el)}
-              className="skill-badge group cursor-pointer"
+              ref={(el) => (badgesRef.current[idx] = el)}
+              onMouseMove={(e) => handleMouseMove(e, idx)}
+              onMouseLeave={() => handleMouseLeave(idx)}
+              className="glass-card flex flex-col items-center justify-center p-5 gap-3 relative overflow-hidden group transition-colors duration-500 hover:border-[rgba(255,255,255,0.15)] hover:shadow-2xl cursor-pointer"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <span className="flex-shrink-0">{skill.icon}</span>
-              <span className="truncate">{skill.name}</span>
+              <div 
+                className="w-12 h-12 flex items-center justify-center rounded-xl bg-[var(--color-bg-tertiary)] border border-[rgba(255,255,255,0.05)] shadow-inner group-hover:scale-110 transition-transform duration-500"
+                style={{ transform: "translateZ(30px)" }}
+              >
+                <div className="scale-110">
+                  {skill.icon}
+                </div>
+              </div>
+              <h3 
+                className="text-sm sm:text-base font-semibold text-[var(--color-text-primary)] tracking-tight text-center"
+                style={{ transform: "translateZ(40px)" }}
+              >
+                {skill.name}
+              </h3>
+              
+              {/* Subtle background decoration per card */}
+              <div className="absolute -bottom-6 -right-6 w-20 h-20 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-2xl group-hover:opacity-[0.08] transition-opacity duration-500 pointer-events-none" />
             </div>
           ))}
         </div>
       </div>
-
-      {/* Section divider */}
-      <div className="section-divider mt-12" />
     </section>
   );
 };

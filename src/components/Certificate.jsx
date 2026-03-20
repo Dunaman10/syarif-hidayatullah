@@ -111,19 +111,19 @@ const Certificate = () => {
       {/* Background decoration */}
       <div className="absolute top-1/4 right-0 w-80 h-80 rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-3xl" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
-        <div ref={headingRef} className="mb-12">
+        <div ref={headingRef} className="mb-16">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[var(--color-accent)] text-sm font-medium tracking-wider uppercase">
               Achievements
             </span>
-            <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
+            <div className="h-px w-24 bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
           </div>
-          <h2 className="heading-display text-3xl sm:text-4xl lg:text-5xl text-[var(--color-text-primary)]">
-            Certificates & <span className="text-gradient">Awards</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--color-text-primary)] tracking-tight">
+            Certificates & <span className="text-[var(--color-accent)]">Awards</span>
           </h2>
-          <p className="mt-4 text-[var(--color-text-secondary)] max-w-xl">
+          <p className="mt-4 text-[var(--color-text-secondary)] text-lg max-w-xl">
             Professional certifications and achievements that validate my expertise and continuous learning.
           </p>
         </div>
@@ -181,23 +181,23 @@ const Certificate = () => {
         <div className="mt-16 p-8 glass-card rounded-2xl">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="heading-display text-3xl sm:text-4xl text-gradient font-bold mb-2">
-                7+
+              <div className="text-3xl sm:text-4xl text-[var(--color-text-primary)] font-bold mb-2 tracking-tight">
+                5+
               </div>
               <div className="text-[var(--color-text-muted)] text-sm">
                 Institutions
               </div>
             </div>
             <div className="text-center">
-              <div className="heading-display text-3xl sm:text-4xl text-gradient font-bold mb-2">
-                15+
+              <div className="text-3xl sm:text-4xl text-[var(--color-text-primary)] font-bold mb-2 tracking-tight">
+                50+
               </div>
               <div className="text-[var(--color-text-muted)] text-sm">
                 Certificates
               </div>
             </div>
             <div className="text-center">
-              <div className="heading-display text-3xl sm:text-4xl text-gradient font-bold mb-2">
+              <div className="text-3xl sm:text-4xl text-[var(--color-text-primary)] font-bold mb-2 tracking-tight">
                 5+
               </div>
               <div className="text-[var(--color-text-muted)] text-sm">
@@ -205,7 +205,7 @@ const Certificate = () => {
               </div>
             </div>
             <div className="text-center">
-              <div className="heading-display text-3xl sm:text-4xl text-gradient font-bold mb-2">
+              <div className="text-3xl sm:text-4xl text-[var(--color-text-primary)] font-bold mb-2 tracking-tight">
                 3+
               </div>
               <div className="text-[var(--color-text-muted)] text-sm">

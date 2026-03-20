@@ -41,14 +41,14 @@ const Bnsp = () => {
       {/* Background decorations */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden -z-10">
         <div className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-[var(--color-cyan)] opacity-[0.03] blur-3xl" />
+        <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-[var(--color-accent)] opacity-[0.03] blur-3xl" />
       </div>
 
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div ref={headerRef} className="mb-12">
           <Link
-            to="/"
+            to="/#certificate"
             className="inline-flex items-center gap-2 text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors mb-8 group"
           >
             <svg

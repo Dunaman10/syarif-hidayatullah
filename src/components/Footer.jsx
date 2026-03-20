@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import LogoFiverr from "../assets/logo-fiverr.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -60,11 +61,18 @@ const Footer = () => {
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/syarif-hidayatullah",
+      url: "https://www.linkedin.com/in/syarif-h-0b5069236/?skipRedirect=true",
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
           <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 11-.01-4.13 2.07 2.07 0 01.01 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z" />
         </svg>
+      ),
+    },
+    {
+      name: "Fiverr",
+      url: "https://www.fiverr.com/s/jjzVY3m",
+      icon: (
+        <img src={LogoFiverr} alt="Fiverr" className="w-[26px] h-[26px] object-contain brightness-0 invert opacity-[0.40] group-hover:opacity-100 transition-opacity" />
       ),
     },
   ];
@@ -89,75 +97,65 @@ const Footer = () => {
   };
 
   return (
-    <footer ref={footerRef} className="footer relative pt-20 pb-8 px-5 sm:px-10">
+    <footer id="footer" ref={footerRef} className="footer relative pt-20 pb-8 px-5 sm:px-10">
       {/* Background decoration */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 max-w-4xl rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-[100px]" />
 
-      <div ref={contentRef} className="max-w-6xl mx-auto relative z-10">
-        {/* Main Footer Content */}
-        <div className="grid md:grid-cols-3 gap-12 lg:gap-20 mb-16">
-          {/* Brand Section */}
-          <div className="md:col-span-1">
-            <h2 className="heading-display text-3xl sm:text-4xl text-[var(--color-text-primary)] mb-4">
-              Syarif <span className="text-gradient">.</span>
-            </h2>
-            <p className="text-[var(--color-text-secondary)] leading-relaxed mb-6">
-              Crafting digital experiences that blend creativity with functionality. 
-              Let's build something amazing together.
-            </p>
+      <div ref={contentRef} className="max-w-5xl mx-auto relative z-10">
+        {/* Main CTA Block */}
+        <div className="glass-card p-10 sm:p-14 md:p-20 relative overflow-hidden group mb-12">
+          {/* Subtle BG flare */}
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#e4e4e7] opacity-[0.02] blur-[100px] rounded-full pointer-events-none transition-opacity duration-700 group-hover:opacity-[0.04]" />
+          
+          <div className="relative z-10 flex flex-col items-start gap-8">
+            <div className="flex items-center gap-3">
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#1dbf73] shadow-[0_0_12px_rgba(29,191,115,0.8)] animate-pulse" />
+              <span className="text-[var(--color-text-secondary)] text-sm md:text-[15px] font-medium tracking-wide">
+                Available for work
+              </span>
+            </div>
+
+            <div>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight mb-2">
+                Building a digital product?
+              </h2>
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-normal text-[var(--color-text-secondary)] tracking-tight">
+                Let's make it sleek
+              </h2>
+            </div>
             
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-[var(--color-text-primary)] font-semibold mb-6">
-              Quick Links
-            </h3>
-            <ul className="space-y-4">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="text-[var(--color-text-primary)] font-semibold mb-6">
-              Let's Connect
-            </h3>
-            <div className="space-y-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                >
-                  {social.icon}
-                  <span>{social.name}</span>
-                </a>
-              ))}
+            <div className="flex flex-col sm:flex-row flex-wrap items-center gap-4 sm:gap-6 mt-4">
+              <a href="mailto:shidayatullah481@gmail.com" className="w-full sm:w-auto px-8 py-3.5 sm:py-4 bg-[#e4e4e7] hover:bg-white text-black rounded-full font-bold text-[17px] transition-transform hover:-translate-y-1 flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(228,228,231,0.2)]">
+                Message Me
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+              
+              <a href="https://www.fiverr.com/s/jjzVY3m" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 py-3.5 sm:py-4 text-[var(--color-text-secondary)] hover:text-white font-semibold text-[17px] transition-colors flex items-center justify-center gap-3">
+                Go to My Fiverr
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.1)] to-transparent mb-8" />
-
-        {/* Bottom Section */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[var(--color-text-muted)] text-sm">
+        {/* Small Bottom Section */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-[rgba(255,255,255,0.05)] pt-8">
+          <p className="text-[var(--color-text-muted)] text-sm text-center sm:text-left">
             © {currentYear} Syarif Hidayatullah. All rights reserved.
           </p>
+          <div className="flex items-center gap-5 sm:gap-6">
+            {socialLinks.map((social) => (
+              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="text-[var(--color-text-muted)] hover:text-white transition-colors group flex items-center justify-center p-0" aria-label={social.name}>
+                {social.icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 

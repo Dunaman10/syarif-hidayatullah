@@ -2,37 +2,37 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Dark Gray Color Palette */
-  --color-bg-primary: #0a0a0f;
-  --color-bg-secondary: #0f0f17;
-  --color-bg-tertiary: #161622;
-  --color-bg-card: rgba(22, 22, 34, 0.6);
+  /* Premium Bento Dark Palette */
+  --color-bg-primary: #0a0a0c;
+  --color-bg-secondary: #121214;
+  --color-bg-tertiary: #18181b;
+  --color-bg-card: #121214;
   
-  /* Accent Colors - Modern Blue */
-  --color-accent: #3b82f6;
-  --color-accent-light: #60a5fa;
-  --color-accent-dark: #2563eb;
-  --color-accent-muted: rgba(59, 130, 246, 0.15);
+  /* Accent Colors - Premium Monochrome/Grey */
+  --color-accent: #e4e4e7;
+  --color-accent-light: #ffffff;
+  --color-accent-dark: #a1a1aa;
+  --color-accent-muted: rgba(228, 228, 231, 0.1);
   
-  /* Secondary Blue Tones */
-  --color-blue-glow: rgba(59, 130, 246, 0.3);
+  /* Secondary Tones */
+  --color-blue-glow: rgba(228, 228, 231, 0.15);
   --color-cyan: #22d3ee;
-  --color-indigo: #818cf8;
+  --color-indigo: #6366f1;
   
   /* Text Colors */
-  --color-text-primary: #f8fafc;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  --color-text-primary: #ededed;
+  --color-text-secondary: #a1a1aa;
+  --color-text-muted: #71717a;
   
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 15, 23, 0.7);
+  /* Glassmorphism - Minimalist Bento Style */
+  --glass-bg: rgba(18, 18, 20, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   
   /* Shadows */
-  --shadow-glow: 0 0 60px rgba(59, 130, 246, 0.2);
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
-  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.2);
+  --shadow-glow: 0 0 30px rgba(228, 228, 231, 0.15);
+  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -65,7 +65,7 @@ body {
   position: relative;
 }
 
-/* Subtle Background Pattern */
+/* Subtle Background Pattern - Bento Minimalist */
 body::before {
   content: '';
   position: fixed;
@@ -74,14 +74,13 @@ body::before {
   right: 0;
   bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(34, 211, 238, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.02) 0%, transparent 70%);
+    radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.02) 0%, transparent 40%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* Grid Pattern Overlay */
+/* Elegant Dotted Grid Pattern */
 body::after {
   content: '';
   position: fixed;
@@ -89,26 +88,22 @@ body::after {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 80px 80px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.5;
 }
 
 /* ============================
    TYPOGRAPHY
    ============================ */
 .heading-display {
-  font-family: "Playfair Display", serif;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-accent) 50%, var(--color-cyan) 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -122,24 +117,21 @@ body::after {
 }
 
 /* ============================
-   GLASSMORPHISM EFFECTS
+   GLASSMORPHISM / BENTO EFFECTS
    ============================ */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(22, 22, 34, 0.8) 0%, rgba(15, 15, 23, 0.6) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .glass-subtle {
@@ -149,22 +141,64 @@ body::after {
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* ============================
-   BUTTON STYLES
-   ============================ */
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.8rem;
+  background: var(--color-accent);
+  color: #000000;
+  font-weight: 600;
+  border-radius: 30px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 4px 15px rgba(228, 228, 231, 0.2);
+}
+
+.btn-glow:hover {
+  transform: translateY(-2px);
+  background: var(--color-accent-light);
+  box-shadow: 0 6px 20px rgba(228, 228, 231, 0.3);
+}
+
+.btn-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.8rem;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Base Buttons */
 .btn-primary {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   padding: 0.875rem 1.75rem;
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  color: white;
+  background: var(--color-accent);
+  color: #000000;
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 30px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+  transition: background-color 0.4s, color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 4px 15px rgba(228, 228, 231, 0.2);
 }
 
 .btn-primary::before {
@@ -174,7 +208,7 @@ body::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.6s ease;
 }
 
@@ -184,44 +218,43 @@ body::after {
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+  background: var(--color-accent-light);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btn-secondary {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   padding: 0.875rem 1.75rem;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.03);
   color: var(--color-text-primary);
   font-weight: 600;
-  border-radius: 12px;
+  border-radius: 30px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: background-color 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .btn-secondary:hover {
-  background: var(--color-accent);
-  border-color: var(--color-accent);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
 }
 
 /* ============================
    CARD HOVER EFFECTS
    ============================ */
 .card-hover {
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .card-hover:hover {
-  transform: translateY(-10px) rotateX(5deg);
+  transform: translateY(-8px) rotateX(3deg);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(59, 130, 246, 0.2);
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(212, 175, 55, 0.3);
 }
 
 /* ============================
@@ -231,23 +264,21 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  padding: 0.8rem 1.5rem;
+  background: var(--color-bg-tertiary);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-radius: 30px;
   color: var(--color-text-primary);
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-size: 0.9rem;
+  transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+  will-change: transform;
 }
 
 .skill-badge:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%);
-  border-color: rgba(59, 130, 246, 0.3);
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .skill-badge svg,
@@ -287,8 +318,8 @@ body::after {
 }
 
 .cert-item .cert-number {
-  font-family: "Playfair Display", serif;
-  font-size: 1.5rem;
+  font-size: 1.35rem; /* slightly downsized since sans-serif is chunkier */
+  font-weight: 500;
   color: var(--color-accent);
   opacity: 0.7;
   transition: all 0.4s ease;
@@ -365,6 +396,7 @@ body::after {
   );
   animation: rotate 4s linear infinite;
   opacity: 0.7;
+  will-change: transform;
 }
 
 .profile-container::after {
@@ -398,7 +430,7 @@ body::after {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(59, 130, 246, 0.3) 50%,
+    rgba(255, 255, 255, 0.1) 50%,
     transparent
   );
   margin: 4rem 0;
@@ -448,30 +480,7 @@ body::after {
   transform: translateY(40px);
 }
 
-/* ============================
-   CURSOR STYLES
-   ============================ */
-.cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--color-accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease, background 0.15s ease;
-  mix-blend-mode: difference;
-}
-
-.cursor-follower {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--color-accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-}
+/* Cursor logic has been deprecated globally */
 
 /* ============================
    PORTFOLIO CARD STYLES
@@ -481,10 +490,9 @@ body::after {
   border-radius: 20px;
   overflow: hidden;
   background: var(--color-bg-card);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: border-color 0.5s, box-shadow 0.5s;
+  will-change: transform;
 }
 
 .portfolio-card::before {
@@ -507,8 +515,8 @@ body::after {
 }
 
 .portfolio-card:hover {
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
 }
 
 .portfolio-card-img {
@@ -616,10 +624,10 @@ body::after {
   width: 80%;
   max-width: 320px;
   height: 100vh;
-  background: linear-gradient(180deg, rgba(15, 15, 23, 0.98) 0%, rgba(10, 10, 15, 0.98) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.98) 0%, rgba(5, 5, 5, 0.98) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
   z-index: 50;
   transform: translateX(100%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -634,10 +642,6 @@ body::after {
    RESPONSIVE ADJUSTMENTS
    ============================ */
 @media (max-width: 640px) {
-  .heading-display {
-    font-size: 2.5rem !important;
-  }
-  
   .profile-container::before {
     width: 110%;
     height: 110%;

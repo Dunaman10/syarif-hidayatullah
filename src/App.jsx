@@ -25,93 +25,39 @@ import Unpam from "./pages/Unpam";
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, ScrollToPlugin);
 
 const App = () => {
-  const cursorRef = useRef(null);
-  const cursorFollowerRef = useRef(null);
-
   useGSAP(() => {
     ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.5,
+      smooth: 0.8,
       effects: true,
     });
   });
 
-  // Custom cursor effect
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    const follower = cursorFollowerRef.current;
-
-    if (!cursor || !follower) return;
-
-    const moveCursor = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX - 10,
-        y: e.clientY - 10,
-        duration: 0.1,
-        ease: "power2.out",
-      });
-
-      gsap.to(follower, {
-        x: e.clientX - 4,
-        y: e.clientY - 4,
-        duration: 0.3,
-        ease: "power2.out",
-      });
-    };
-
-    const handleMouseEnter = () => {
-      gsap.to([cursor, follower], {
-        scale: 1.5,
-        duration: 0.3,
-      });
-    };
-
-    const handleMouseLeave = () => {
-      gsap.to([cursor, follower], {
-        scale: 1,
-        duration: 0.3,
-      });
-    };
-
-    window.addEventListener("mousemove", moveCursor);
-
-    // Add hover effects to interactive elements
-    const interactiveElements = document.querySelectorAll(
-      "a, button, .btn-primary, .btn-secondary, .skill-badge, .portfolio-card"
-    );
-
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleMouseEnter);
-      el.addEventListener("mouseleave", handleMouseLeave);
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
-      });
-    };
-  }, []);
-
   const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        gsap.to(window, {
+          duration: 0.5,
+          scrollTo: { y: location.hash, offsetY: 80 },
+          ease: "power2.out"
+        });
+        
+        // Remove the hash from URL cleanly so refresh starts at the top
+        window.history.replaceState(null, '', location.pathname);
+      }, 100); // wait for layout and smoother init
+    } else {
+      // Always scroll to top when navigating to a new route without a hash
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
 
   const hideNavbar = location.pathname.startsWith("/certificate");
 
   return (
     <>
-      {/* Custom Cursor (hidden on mobile) */}
-      <div
-        ref={cursorRef}
-        className="cursor hidden lg:block"
-        style={{ pointerEvents: "none" }}
-      />
-      <div
-        ref={cursorFollowerRef}
-        className="cursor-follower hidden lg:block"
-        style={{ pointerEvents: "none" }}
-      />
 
       {!hideNavbar && <Navbar />}
       <div id="smooth-wrapper">

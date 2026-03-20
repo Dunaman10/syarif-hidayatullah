@@ -3,6 +3,7 @@ import gsap from "gsap";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
+import CV from "../assets/cv.pdf";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger, ScrollToPlugin);
 
@@ -57,12 +58,22 @@ const Navbar = () => {
       setScrolled(window.scrollY > 50);
 
       // Detect active section
-      const sections = ["home", "skills", "portfolio", "certificate"];
-      for (const section of sections) {
+      const sections = ["home", "skills", "portfolio", "certificate", "footer"];
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
+          
+          // Special fallback for the last section (footer/contact)
+          // If its bottom is fully visible in the viewport, make it active
+          if (i === sections.length - 1 && rect.bottom <= window.innerHeight + 20 && rect.top < window.innerHeight) {
+            setActiveSection(section);
+            break;
+          }
+
+          // Normal section activation (top reaches 40% of screen height)
+          if (rect.top <= window.innerHeight * 0.4) {
             setActiveSection(section);
             break;
           }
@@ -79,6 +90,7 @@ const Navbar = () => {
     { id: "skills", label: "Skills" },
     { id: "portfolio", label: "Portfolio" },
     { id: "certificate", label: "Certificate" },
+    { id: "footer", label: "Contact" },
   ];
 
   const handleNavClick = (e, sectionId) => {
@@ -88,11 +100,11 @@ const Navbar = () => {
     // Small delay to allow menu to close first
     setTimeout(() => {
       gsap.to(window, {
-        duration: 1,
+        duration: 0.5,
         scrollTo: { y: `#${sectionId}`, offsetY: 80 },
-        ease: "power3.inOut",
+        ease: "power2.out",
       });
-    }, isOpen ? 300 : 0);
+    }, isOpen ? 150 : 0);
   };
 
   const toggleMenu = () => {
@@ -105,50 +117,54 @@ const Navbar = () => {
 
   return (
     <>
-      <nav
-        ref={navRef}
-        className={`fixed w-full flex justify-between items-center px-5 py-4 sm:px-10 sm:py-5 transition-all duration-500 z-50 ${
-          scrolled ? "glass" : "bg-transparent"
-        }`}
-      >
-        {/* Logo */}
-        <a
-          ref={logoRef}
-          href="#"
-          onClick={(e) => handleNavClick(e, "home")}
-          className="font-semibold text-lg sm:text-xl tracking-tight text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-300"
+      <div className="fixed top-0 left-0 w-full flex justify-center z-50 p-4 sm:p-6 pointer-events-none">
+        <nav
+          ref={navRef}
+          className={`pointer-events-auto w-full max-w-5xl flex justify-between items-center px-6 py-3 sm:px-8 sm:py-4 rounded-2xl sm:rounded-full transition-all duration-500 ${
+            scrolled 
+              ? "bg-[rgba(20,20,20,0.85)] backdrop-blur-xl border border-[rgba(255,255,255,0.08)] shadow-[0_8px_32px_rgba(0,0,0,0.4)]" 
+              : "bg-[rgba(20,20,20,0.4)] backdrop-blur-md border border-[rgba(255,255,255,0.03)]"
+          }`}
         >
-          <span className="heading-display">Syarif</span>
-          <span className="text-[var(--color-accent)] ml-1">.</span>
-        </a>
+        {/* Mobile Header / Logo (Hidden on Desktop to match design) */}
+        <div className="flex sm:hidden items-center justify-between w-full">
+          <a
+            ref={logoRef}
+            href="#"
+            onClick={(e) => handleNavClick(e, "home")}
+            className="font-bold text-xl tracking-tighter text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors duration-300"
+          >
+            Syarif<span className="text-[var(--color-accent)] ml-0.5">.</span>
+          </a>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={toggleMenu}
-          className="sm:hidden relative w-10 h-10 flex items-center justify-center rounded-xl glass-subtle z-[60]"
-          aria-label="Toggle menu"
-        >
-          <div className="flex flex-col gap-1.5 items-center justify-center w-5">
-            <span
-              className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
-                isOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 ${
-                isOpen ? "opacity-0 scale-0" : ""
-              }`}
-            />
-            <span
-              className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
-                isOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </div>
-        </button>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="relative w-10 h-10 flex items-center justify-center rounded-xl glass-subtle z-[60]"
+            aria-label="Toggle menu"
+          >
+            <div className="flex flex-col gap-1.5 items-center justify-center w-5">
+              <span
+                className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 ${
+                  isOpen ? "opacity-0 scale-0" : ""
+                }`}
+              />
+              <span
+                className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
+                  isOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </div>
+          </button>
+        </div>
 
         {/* Desktop Navigation */}
-        <ul className="hidden sm:flex items-center gap-8">
+        <ul className="hidden sm:flex flex-1 items-center gap-8">
           {navItems.map((item, index) => (
             <li key={item.id}>
               <a
@@ -162,22 +178,24 @@ const Navbar = () => {
                 }`}
               >
                 {item.label}
-                {activeSection === item.id && (
-                  <span className="absolute left-0 bottom-[-4px] w-full h-0.5 bg-[var(--color-accent)] rounded-full" />
-                )}
+                <span 
+                  className={`absolute left-0 bottom-[-4px] w-full h-0.5 bg-[var(--color-accent)] rounded-full transition-transform duration-300 ease-out origin-left ${
+                    activeSection === item.id ? "scale-x-100" : "scale-x-0"
+                  }`} 
+                />
               </a>
             </li>
           ))}
           
           {/* CTA Button */}
-          <li ref={(el) => (linksRef.current[4] = el)}>
+          <li ref={(el) => (linksRef.current[4] = el)} className="ml-auto">
             <a
-              href="https://wa.me/6282133223201"
+              href={CV}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm py-2.5 px-5"
+              className="btn-glow text-sm py-2 px-6"
             >
-              <span>Let's Talk</span>
+              <span>Download CV</span>
               <svg
                 width="16"
                 height="16"
@@ -196,7 +214,8 @@ const Navbar = () => {
             </a>
           </li>
         </ul>
-      </nav>
+        </nav>
+      </div>
 
       {/* Mobile Menu Overlay */}
       <div 
@@ -242,13 +261,13 @@ const Navbar = () => {
           {/* Mobile CTA */}
           <div className="pt-6 border-t border-[rgba(255,255,255,0.08)]">
             <a
-              href="https://wa.me/6282133223201"
+              href={CV}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary w-full justify-center"
               onClick={closeMenu}
             >
-              <span>Contact Me</span>
+              <span>Download CV</span>
               <svg
                 width="18"
                 height="18"

@@ -11,10 +11,12 @@ import CekCrypto from "../assets/portfolio/cekcrypto.jpg";
 import Daruttafsir from "../assets/portfolio/daruttafsir.png";
 import CateringMama from "../assets/portfolio/catering-mama.png";
 import AmirElixir from "../assets/portfolio/amir-elixir.png";
+import Zentury from "../assets/portfolio/zentury.png";
+import VMS from "../assets/portfolio/vms.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ITEMS_PER_PAGE = 6;
+const ITEMS_PER_PAGE = 3;
 
 const Portfolio = () => {
   const sectionRef = useRef(null);
@@ -29,6 +31,27 @@ const Portfolio = () => {
     // Web Development Projects
     {
       id: 1,
+      title: "Zentury",
+      subtitle: "Front-End Web Development",
+      description:
+        "Modern landing page with high-performance animations and sleek UI, built with React 19, Tailwind CSS v4, and GSAP for smooth scroll-driven interactions.",
+      image: Zentury,
+      category: "web",
+      tech: ["React", "Tailwind CSS", "GSAP"],
+      link: "https://zenturyy.vercel.app/",
+    },
+    {
+      id: 2,
+      title: "Cute Top Up",
+      description:
+        "Gaming top-up mobile app design featuring popular games like Mobile Legends, PUBG, Free Fire, and Honor of Kings.",
+      image: CuteTopup,
+      category: "uiux",
+      tech: ["Figma", "UI Design", "Mobile App"],
+      link: null,
+    },
+    {
+      id: 3,
       title: "Daruttafsir",
       description:
         "Modern Islamic education website for Pondok Pesantren Darut Tafsir featuring Quranic studies, facilities showcase, and student enrollment system.",
@@ -38,7 +61,17 @@ const Portfolio = () => {
       link: "https://daruttafsir.santriqu.id/",
     },
     {
-      id: 2,
+      id: 4,
+      title: "VMS",
+      description:
+        "Full-featured Vehicle Management System built on TALL Stack with Filament v5 admin panel, Livewire v3 real-time components, and MySQL database.",
+      image: VMS,
+      category: "web",
+      tech: ["Laravel 12", "Filament", "Livewire"],
+      link: "https://vms.laravel.cloud/",
+    },
+    {
+      id: 5,
       title: "Catering Mama",
       description:
         "Professional catering service website offering authentic Indonesian home-cooked meals with online ordering and delivery service.",
@@ -48,7 +81,7 @@ const Portfolio = () => {
       link: "https://catering-mama.netlify.app/",
     },
     {
-      id: 3,
+      id: 6,
       title: "Amir Elixir",
       description:
         "Luxury perfume e-commerce platform with premium design, featuring product catalog from Contentful CMS and elegant user experience.",
@@ -58,7 +91,7 @@ const Portfolio = () => {
       link: "https://amirperfume.edgeone.dev/",
     },
     {
-      id: 4,
+      id: 7,
       title: "Movientory",
       description:
         "A movie discovery platform that allows users to search through thousands of movies and explore trending titles.",
@@ -68,7 +101,7 @@ const Portfolio = () => {
       link: "https://movientory.vercel.app/",
     },
     {
-      id: 5,
+      id: 8,
       title: "Trendy Wear",
       description:
         "A modern and stylish e-commerce landing page for a clothing brand with premium aesthetics.",
@@ -78,7 +111,7 @@ const Portfolio = () => {
       link: "https://trendy-wear.vercel.app/",
     },
     {
-      id: 6,
+      id: 9,
       title: "Wedding Invitation",
       description:
         "A digital wedding invitation template featuring interactive elements and elegant design.",
@@ -88,7 +121,7 @@ const Portfolio = () => {
       link: "https://wedding-invitation-six-mu.vercel.app/",
     },
     {
-      id: 7,
+      id: 10,
       title: "Company Profile",
       description:
         "A professional corporate landing page showcasing services, portfolio, and contact sections.",
@@ -98,7 +131,7 @@ const Portfolio = () => {
       link: "https://company-profile-dusky.vercel.app/",
     },
     {
-      id: 8,
+      id: 11,
       title: "Flappy Bird Game",
       description:
         "A web-based recreation of the classic Flappy Bird game with additional cheat features.",
@@ -109,7 +142,7 @@ const Portfolio = () => {
     },
     // UI/UX Design Projects
     {
-      id: 9,
+      id: 12,
       title: "At-Tasawuq",
       description:
         "E-Commerce mobile app UI design for a shoes marketplace with modern product display and seamless shopping experience.",
@@ -119,17 +152,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 10,
-      title: "Cute Top Up",
-      description:
-        "Gaming top-up mobile app design featuring popular games like Mobile Legends, PUBG, Free Fire, and Honor of Kings.",
-      image: CuteTopup,
-      category: "uiux",
-      tech: ["Figma", "UI Design", "Mobile App"],
-      link: null,
-    },
-    {
-      id: 11,
+      id: 13,
       title: "HouseSpace",
       description:
         "Real estate website design with property search functionality for finding homes, apartments, and residential properties.",
@@ -139,7 +162,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 12,
+      id: 14,
       title: "Kopi Anak Senja",
       description:
         "Coffee shop website with warm aesthetics, featuring menu showcase and beautiful landing page.",
@@ -149,7 +172,7 @@ const Portfolio = () => {
       link: null,
     },
     {
-      id: 13,
+      id: 15,
       title: "CekCrypto",
       description:
         "Cryptocurrency market platform for tracking Bitcoin, Ethereum and other crypto prices with real-time data.",
@@ -232,16 +255,28 @@ const Portfolio = () => {
 
   useEffect(() => {
     // Re-animate cards when filter or page changes
+    const validCards = cardsRef.current.filter(Boolean);
+    if (!validCards.length) {
+      // Even with no cards, refresh ScrollTrigger for layout recalculation
+      ScrollTrigger.refresh();
+      return;
+    }
+
     gsap.fromTo(
-      cardsRef.current.filter(Boolean),
-      { opacity: 0, y: 50, scale: 0.95 },
+      validCards,
+      { opacity: 0, y: 30, scale: 0.98 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.6,
+        duration: 0.8,
         stagger: 0.1,
-        ease: "power3.out",
+        ease: "power4.out",
+        overwrite: true,
+        onComplete: () => {
+          // Recalculate scroll positions after content height changes
+          ScrollTrigger.refresh();
+        },
       }
     );
   }, [activeFilter, currentPage, paginatedProjects.length]);
@@ -256,17 +291,17 @@ const Portfolio = () => {
       <div className="absolute top-1/3 right-0 w-96 h-96 rounded-full bg-[var(--color-accent)] opacity-[0.02] blur-3xl" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[var(--color-cyan)] opacity-[0.02] blur-3xl" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
-        <div ref={headingRef} className="mb-12">
+        <div ref={headingRef} className="mb-16">
           <div className="flex items-center gap-4 mb-4">
             <span className="text-[var(--color-accent)] text-sm font-medium tracking-wider uppercase">
               My Work
             </span>
-            <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
+            <div className="h-px w-24 bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
           </div>
-          <h2 className="heading-display text-3xl sm:text-4xl lg:text-5xl text-[var(--color-text-primary)]">
-            Featured <span className="text-gradient">Projects</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[var(--color-text-primary)] tracking-tight">
+            My <span className="text-[var(--color-accent)]">Portfolio</span>
           </h2>
           <p className="mt-4 text-[var(--color-text-secondary)] max-w-xl">
             A showcase of my recent work, personal projects, and creative
@@ -277,16 +312,17 @@ const Portfolio = () => {
         {/* Filters */}
         <div
           ref={filtersRef}
-          className="flex flex-wrap gap-3 mb-12"
+          className="flex flex-nowrap sm:flex-wrap items-center gap-1 sm:gap-2 mb-12 p-1.5 sm:p-2 rounded-full border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] w-full sm:w-max max-w-full overflow-x-auto [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {filters.map((filter) => (
             <button
               key={filter.id}
               onClick={() => handleFilterChange(filter.id)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
+              className={`px-5 sm:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-[15px] font-semibold transition-all duration-500 whitespace-nowrap ${
                 activeFilter === filter.id
-                  ? "bg-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-accent)]/30"
-                  : "glass-subtle text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-accent)]/30"
+                  ? "bg-transparent border border-white text-white shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                  : "bg-transparent border border-transparent text-[var(--color-text-secondary)] hover:text-white"
               }`}
             >
               {filter.label}
@@ -295,73 +331,74 @@ const Portfolio = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" style={{ perspective: "1500px" }}>
           {paginatedProjects.map((project, index) => (
             <ProjectCard
               key={project.id}
               project={project}
+              index={index}
               ref={(el) => (cardsRef.current[index] = el)}
             />
           ))}
         </div>
 
-        {/* Pagination */}
+        {/* Pagination & Details */}
         {totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2 mt-12">
-            {/* Previous Button */}
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                currentPage === 1
-                  ? "opacity-50 cursor-not-allowed glass-subtle"
-                  : "glass-subtle hover:bg-[var(--color-accent)] hover:text-white"
-              }`}
-              aria-label="Previous page"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M15 18L9 12L15 6" />
-              </svg>
-            </button>
-
-            {/* Page Numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          <div className="flex flex-col items-center mt-16 gap-6 w-full">
+            <div className="flex items-center gap-2 sm:gap-3">
+              {/* Previous Button */}
               <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-medium transition-all duration-300 ${
-                  currentPage === page
-                    ? "bg-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-accent)]/30"
-                    : "glass-subtle text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]"
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                  currentPage === 1
+                    ? "opacity-50 cursor-not-allowed bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-muted)]"
+                    : "bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.05)] hover:text-white"
                 }`}
+                aria-label="Previous page"
               >
-                {page}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
               </button>
-            ))}
 
-            {/* Next Button */}
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                currentPage === totalPages
-                  ? "opacity-50 cursor-not-allowed glass-subtle"
-                  : "glass-subtle hover:bg-[var(--color-accent)] hover:text-white"
-              }`}
-              aria-label="Next page"
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18L15 12L9 6" />
-              </svg>
-            </button>
+              {/* Page Numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center text-sm sm:text-[15px] font-bold transition-all duration-300 ${
+                    currentPage === page
+                      ? "bg-[#e4e4e7] text-black shadow-[0_0_20px_rgba(228,228,231,0.2)]"
+                      : "bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.05)] hover:text-white"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+              {/* Next Button */}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 ${
+                  currentPage === totalPages
+                    ? "opacity-50 cursor-not-allowed bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-muted)]"
+                    : "bg-[rgba(255,255,255,0.02)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.05)] hover:text-white"
+                }`}
+                aria-label="Next page"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Page info */}
+            <p className="text-[var(--color-text-secondary)] font-medium text-[15px]">
+              Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredProjects.length)} of {filteredProjects.length} projects
+            </p>
           </div>
-        )}
-
-        {/* Page info */}
-        {totalPages > 1 && (
-          <p className="text-center text-[var(--color-text-muted)] text-sm mt-4">
-            Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filteredProjects.length)} of {filteredProjects.length} projects
-          </p>
         )}
       </div>
 
@@ -372,8 +409,14 @@ const Portfolio = () => {
 };
 
 // Project Card Component
-const ProjectCard = React.forwardRef(({ project }, ref) => {
+const ProjectCard = React.forwardRef(({ project, index }, ref) => {
   const cardRef = useRef(null);
+  
+  // Premium Staggered Layout Logic
+  // Indexes 0, 3, 6 will span full width (2 columns). Others will be 1 column squares.
+  const isFullWidth = index % 3 === 0;
+  // Indexes 3, 9 will push the image to the left side instead of right, alternating the layout heavily!
+  const isReversed = index % 6 === 3;
 
   // 3D tilt effect on hover
   const handleMouseMove = (e) => {
@@ -382,17 +425,15 @@ const ProjectCard = React.forwardRef(({ project }, ref) => {
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+    
+    const xPct = (x / rect.width) - 0.5;
+    const yPct = (y / rect.height) - 0.5;
 
     gsap.to(cardRef.current, {
-      rotateX,
-      rotateY,
-      transformPerspective: 1000,
-      duration: 0.3,
+      rotateY: xPct * 5,
+      rotateX: -yPct * 5,
+      transformPerspective: 1200,
+      duration: 0.4,
       ease: "power2.out",
     });
   };
@@ -402,8 +443,8 @@ const ProjectCard = React.forwardRef(({ project }, ref) => {
     gsap.to(cardRef.current, {
       rotateX: 0,
       rotateY: 0,
-      duration: 0.5,
-      ease: "elastic.out(1, 0.5)",
+      duration: 1,
+      ease: "power3.out",
     });
   };
 
@@ -428,49 +469,38 @@ const ProjectCard = React.forwardRef(({ project }, ref) => {
           }
         }
       }}
-      className={`portfolio-card group block ${project.link ? 'cursor-pointer' : 'cursor-default'}`}
+      className={`glass-card p-0 relative overflow-hidden group block transition-colors duration-500 hover:border-[rgba(255,255,255,0.15)] hover:shadow-2xl flex ${
+        isFullWidth ? `flex-col md:col-span-2 ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'}` : 'flex-col col-span-1'
+      } ${project.link ? 'cursor-pointer' : 'cursor-default'}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ transformStyle: "preserve-3d" }}
     >
-      {/* Image */}
-      <div className="relative overflow-hidden">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="portfolio-card-img"
-        />
+      {/* Content Area */}
+      <div 
+        className={`flex flex-col justify-center p-6 sm:p-8 lg:p-10 z-10 ${isFullWidth ? 'md:w-1/2' : 'w-full order-last'} ${isReversed ? 'md:pl-12' : ''}`} 
+        style={{ transform: "translateZ(30px)" }}
+      >
+        <span className="text-[var(--color-text-secondary)] text-xs font-semibold tracking-wider mb-2 uppercase">
+          {project.subtitle ? project.subtitle : isFullWidth ? "Portfolio" : project.category === 'uiux' ? "UI/UX Design" : "Web Development"}
+        </span>
         
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
-        {/* Category Badge */}
-        <div className="absolute top-3 right-3">
-          <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${
-            project.category === 'uiux' 
-              ? 'bg-[var(--color-cyan)]/20 text-[var(--color-cyan)]' 
-              : 'bg-[var(--color-accent)]/20 text-[var(--color-accent-light)]'
-          }`}>
-            {project.category === 'uiux' ? 'UI/UX' : 'Web Dev'}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-accent-light)] transition-colors">
+        <h3 className={`font-bold text-[var(--color-text-primary)] tracking-tight mb-4 group-hover:text-[var(--color-accent-light)] transition-colors ${
+          isFullWidth ? 'text-2xl sm:text-3xl lg:text-4xl' : 'text-xl sm:text-2xl'
+        }`}>
           {project.title}
         </h3>
-        <p className="text-sm text-[var(--color-text-secondary)] mb-4 line-clamp-2">
+        
+        <p className="text-[var(--color-text-secondary)] text-[15px] sm:text-sm mb-6 line-clamp-3">
           {project.description}
         </p>
 
         {/* Tech Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-8">
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="text-xs px-2.5 py-1 rounded-md bg-[var(--color-accent-muted)] text-[var(--color-accent-light)] font-medium"
+              className="text-xs px-3 py-1.5 rounded-lg bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)] text-[var(--color-text-secondary)] font-medium"
             >
               {tech}
             </span>
@@ -479,40 +509,40 @@ const ProjectCard = React.forwardRef(({ project }, ref) => {
 
         {/* CTA */}
         {project.link ? (
-          <div className="flex items-center gap-2 text-sm text-[var(--color-accent)] font-medium group-hover:gap-3 transition-all">
-            <span>View Project</span>
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M7 17L17 7M17 7H7M17 7V17" />
+          <div className="flex items-center gap-2 text-sm text-[var(--color-text-primary)] font-semibold group-hover:gap-3 transition-all mt-auto w-max">
+            <span className="border-b border-transparent group-hover:border-[var(--color-text-primary)] transition-colors pb-0.5">Explore Project</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:opacity-100 transition-opacity">
+              <path d="M5 12h14"></path>
+              <path d="M12 5l7 7-7 7"></path>
             </svg>
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] font-medium">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M12 19l7-7 3 3-7 7-3-3z" />
-              <path d="M18 13l-1.5-7.5L9 7l1.5 7.5L18 13z" />
-              <path d="M2 21l-1-8.5L11 2l8 1 1 9-7 11-4-2z" />
+          <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] font-medium mt-auto w-max">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
             </svg>
-            <span>Design Only</span>
+            <span>Design Concept</span>
           </div>
         )}
+      </div>
+
+      {/* Image Area */}
+      <div 
+        className={`relative overflow-hidden flex items-center justify-center bg-[var(--color-bg-tertiary)] ${
+          isFullWidth ? `md:w-1/2 min-h-[220px] sm:min-h-[280px] md:min-h-0 md:self-stretch ${isReversed ? 'border-r' : 'border-l'} border-[rgba(255,255,255,0.05)]` : 'w-full aspect-video order-first border-b border-[rgba(255,255,255,0.05)]'
+        }`}
+        style={{ transform: "translateZ(10px)" }}
+      >
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+        />
+        
+        {/* Subtle hover gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)]/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
       </div>
     </Wrapper>
   );
