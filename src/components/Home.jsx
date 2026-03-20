@@ -235,10 +235,9 @@ const Home = () => {
             <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8 max-w-xl text-justify">
               Detail-oriented{" "}
               <span className="font-medium text-[var(--color-text-primary)]">
-                Full Stack Web Developer
+              Web Developer
               </span>{" "}
-              with hands-on experience building scalable applications using
-              Laravel, React JS, and Tailwind CSS. Skilled in end-to-end
+              with hands-on experience building scalable applications. Skilled in end-to-end
               development, from database architecture to{" "}
               <span className="text-white">UI/UX implementation</span>, with a
               strong focus on delivering efficient solutions for business and

@@ -77,25 +77,6 @@ const Footer = () => {
     },
   ];
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Skills", href: "#skills" },
-    { name: "Portfolio", href: "#portfolio" },
-    { name: "Certificate", href: "#certificate" },
-  ];
-
-  const scrollToSection = (e, sectionId) => {
-    e.preventDefault();
-    const element = document.querySelector(sectionId);
-    if (element) {
-      gsap.to(window, {
-        duration: 1,
-        scrollTo: { y: sectionId, offsetY: 80 },
-        ease: "power3.inOut",
-      });
-    }
-  };
-
   return (
     <footer id="footer" ref={footerRef} className="footer relative pt-20 pb-8 px-5 sm:px-10">
       {/* Background decoration */}
