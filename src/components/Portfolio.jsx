@@ -169,7 +169,7 @@ const Portfolio = () => {
       image: KopiAnakSenja,
       category: "web",
       tech: ["HTML", "CSS", "JavaScript"],
-      link: null,
+      link: "https://kedai-kopi-anak-senja-hrvo.vercel.app/",
     },
     {
       id: 15,
@@ -179,7 +179,7 @@ const Portfolio = () => {
       image: CekCrypto,
       category: "web",
       tech: ["HTML", "CSS", "JavaScript"],
-      link: null,
+      link: "https://cekcrypto.vercel.app/",
     },
   ];
 
