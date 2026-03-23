@@ -13,6 +13,7 @@ import CateringMama from "../assets/portfolio/catering-mama.png";
 import AmirElixir from "../assets/portfolio/amir-elixir.png";
 import Zentury from "../assets/portfolio/zentury.png";
 import VMS from "../assets/portfolio/vms.png";
+import NanoConnect from "../assets/portfolio/nanoconnect.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +70,16 @@ const Portfolio = () => {
       category: "web",
       tech: ["Laravel 12", "Filament", "Livewire"],
       link: "https://vms.laravel.cloud/",
+    },
+    {
+      id: 16,
+      title: "NanoConnect",
+      description:
+        "Nano influencer marketplace platform connecting Indonesian SMEs (UMKM) with nano creators (1K-20K followers) for affordable, authentic, and effective local marketing campaigns.",
+      image: NanoConnect,
+      category: "web",
+      tech: ["React", "Tailwind CSS", "EdgeOne"],
+      link: "https://nanoconnect.edgeone.dev/",
     },
     {
       id: 5,
