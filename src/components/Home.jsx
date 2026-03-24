@@ -279,29 +279,6 @@ const Home = () => {
           </div>
         </div>
 
-        {/* LinkedIn Activity */}
-        <div className="mt-20 w-full flex flex-col items-center">
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-[var(--color-accent)] text-sm font-medium tracking-wider uppercase">
-              Latest Update
-            </span>
-            <div className="h-px w-24 bg-gradient-to-r from-[var(--color-accent)] to-transparent" />
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] tracking-tight mb-8">
-            My <span className="text-[var(--color-accent)]">LinkedIn</span> Post
-          </h2>
-          <div className="w-full max-w-[504px] overflow-hidden rounded-2xl bg-white border border-[rgba(255,255,255,0.05)] shadow-[0_0_40px_rgba(0,0,0,0.2)] mx-auto flex justify-center">
-            <iframe 
-              src="https://www.linkedin.com/embed/feed/update/urn:li:share:7442127826738360320" 
-              height="663" 
-              width="504" 
-              frameBorder="0" 
-              allowFullScreen="" 
-              title="Posting tersemat"
-              className="w-full"
-            ></iframe>
-          </div>
-        </div>
       </div>
     </section>
   );
