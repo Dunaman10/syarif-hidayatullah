@@ -95,7 +95,7 @@ const Codepolitan = () => {
 
   // Get certificate file path
   const getCertificatePath = (filename) => {
-    return `/src/assets/certificate/codepolitan/${filename}`;
+    return new URL(`../assets/certificate/codepolitan/${filename}`, import.meta.url).href;
   };
 
   useEffect(() => {
