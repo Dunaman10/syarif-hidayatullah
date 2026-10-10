@@ -273,33 +273,33 @@ export default function AdminCertificatesPage() {
             return (
               <div key={cat.id} className="glass-card overflow-hidden">
                 {/* Category Header Row */}
-                <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-4 cursor-pointer flex-1" onClick={() => handleToggleExpand(cat.id)}>
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold transition-all ${isExpanded ? "bg-[var(--color-accent)] text-black" : "bg-white/5 text-zinc-400"}`}>
+                <div className="p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
+                  <div className="flex items-center gap-3 sm:gap-4 cursor-pointer flex-1 min-w-0" onClick={() => handleToggleExpand(cat.id)}>
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold transition-all flex-shrink-0 ${isExpanded ? "bg-[var(--color-accent)] text-black" : "bg-white/5 text-zinc-400"}`}>
                       {isExpanded ? "▼" : "▶"}
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-white text-sm">{cat.name}</h3>
-                        <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[var(--color-accent-muted)] text-[var(--color-accent)] border border-[var(--color-accent)]/20">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h3 className="font-bold text-white text-sm truncate">{cat.name}</h3>
+                        <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-[var(--color-accent-muted)] text-[var(--color-accent)] border border-[var(--color-accent)]/20">
                           {cat.category_type}
                         </span>
                       </div>
-                      <p className="text-xs text-zinc-500">{cat.description}</p>
+                      <p className="text-xs text-zinc-500 line-clamp-1 mt-0.5">{cat.description}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 self-end sm:self-center">
+                  <div className="flex items-center gap-2 flex-wrap justify-end pt-2 md:pt-0 border-t md:border-t-0 border-white/5">
                     <button onClick={() => openCertForm(cat.id, cat.name)}
-                      className="px-3 py-1.5 rounded-lg bg-[var(--color-accent-muted)] hover:bg-[var(--color-accent)]/20 text-[var(--color-accent)] text-xs font-semibold transition-colors">
+                      className="px-3 py-1.5 rounded-xl bg-[var(--color-accent-muted)] hover:bg-[var(--color-accent)]/20 text-[var(--color-accent)] text-xs font-semibold transition-colors">
                       + Add Sertifikat
                     </button>
                     <button onClick={() => openCatForm(cat)}
-                      className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-zinc-300 transition-colors">
+                      className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-300 transition-colors">
                       Edit
                     </button>
                     <button onClick={() => handleDeleteCat(cat.id)}
-                      className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 transition-colors">
+                      className="px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 transition-colors">
                       Delete
                     </button>
                   </div>
@@ -321,32 +321,32 @@ export default function AdminCertificatesPage() {
                     ) : (
                       <div className="divide-y divide-white/5">
                         {certs.map((cert, idx) => (
-                          <div key={cert.id} className="px-5 py-3.5 flex items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors">
-                            <div className="flex items-center gap-4">
-                              <span className="text-zinc-600 font-mono text-xs w-6">
+                          <div key={cert.id} className="px-4 sm:px-5 py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-white/[0.02] transition-colors">
+                            <div className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+                              <span className="text-zinc-600 font-mono text-xs w-5 flex-shrink-0">
                                 {String(idx + 1).padStart(2, "0")}
                               </span>
-                              <div>
-                                <h4 className="text-sm font-medium text-white">{cert.title}</h4>
+                              <div className="min-w-0 flex-1">
+                                <h4 className="text-xs sm:text-sm font-medium text-white truncate">{cert.title}</h4>
                                 <div className="flex items-center gap-2 mt-0.5">
                                   <span className="text-[11px] text-zinc-500">{cert.level}</span>
                                   {cert.pdf_url && (
                                     <a href={cert.pdf_url} target="_blank"
-                                      className="text-[11px] text-[var(--color-accent)] hover:underline">
+                                      className="text-[11px] text-[var(--color-accent)] hover:underline flex items-center gap-0.5">
                                       PDF ↗
                                     </a>
                                   )}
                                 </div>
                               </div>
                             </div>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 self-end sm:self-center flex-shrink-0">
                               <button onClick={() => openCertForm(cat.id, cat.name, cert)}
-                                className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-zinc-300 transition-colors">
+                                className="px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-300 transition-colors">
                                 Edit
                               </button>
                               <button onClick={() => handleDeleteCert(cert.id, cat.id)}
-                                className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 transition-colors">
-                                Del
+                                className="px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 transition-colors">
+                                Delete
                               </button>
                             </div>
                           </div>

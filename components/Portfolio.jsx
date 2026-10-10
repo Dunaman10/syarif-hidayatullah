@@ -344,9 +344,11 @@ const ProjectCard = React.forwardRef(({ project, index }, ref) => {
     >
       {/* Content Area */}
       <div
-        className={`flex flex-col justify-center p-6 sm:p-8 lg:p-10 z-10 ${
-          isFullWidth ? "md:w-1/2" : "w-full order-last"
-        } ${isReversed ? "md:pl-12" : ""}`}
+        className={`flex flex-col justify-center p-6 sm:p-8 lg:p-10 z-10 order-last ${
+          isFullWidth
+            ? `md:w-1/2 ${isReversed ? "md:order-last md:pl-12" : "md:order-first"}`
+            : "w-full"
+        }`}
         style={{ transform: "translateZ(30px)" }}
       >
         <span className="text-[var(--color-text-secondary)] text-xs font-semibold tracking-wider mb-2 uppercase">
@@ -431,12 +433,12 @@ const ProjectCard = React.forwardRef(({ project, index }, ref) => {
 
       {/* Image Area */}
       <div
-        className={`relative overflow-hidden flex items-center justify-center bg-[var(--color-bg-tertiary)] ${
+        className={`relative overflow-hidden flex items-center justify-center bg-[var(--color-bg-tertiary)] order-first ${
           isFullWidth
-            ? `md:w-1/2 min-h-[220px] sm:min-h-[280px] md:min-h-0 md:self-stretch ${
-                isReversed ? "border-r" : "border-l"
+            ? `md:w-1/2 min-h-[220px] sm:min-h-[280px] md:min-h-0 md:self-stretch border-b md:border-b-0 ${
+                isReversed ? "md:order-first md:border-r" : "md:order-last md:border-l"
               } border-[rgba(255,255,255,0.05)]`
-            : "w-full aspect-video order-first border-b border-[rgba(255,255,255,0.05)]"
+            : "w-full aspect-video border-b border-[rgba(255,255,255,0.05)]"
         }`}
         style={{ transform: "translateZ(10px)" }}
       >

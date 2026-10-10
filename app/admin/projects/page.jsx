@@ -13,6 +13,8 @@ export default function AdminProjectsPage() {
   const [seeding, setSeeding] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
+  const [deletingProject, setDeletingProject] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -190,14 +192,89 @@ export default function AdminProjectsPage() {
     setFormOpen(false);
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this project?")) return;
+  const handleDeleteConfirm = async () => {
+    if (!deletingProject) return;
+    setIsDeleting(true);
+    try {
+      if (isSupabaseConfigured && isDbConnected) {
+        const { error } = await supabase
+          .from("projects")
+          .delete()
+          .eq("id", deletingProject.id);
+        if (error) alert(error.message);
+        fetchProjects();
+      } else {
+        setProjects(projects.filter((p) => p.id !== deletingProject.id));
+      }
+      setDeletingProject(null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  // Drag and drop state & handlers
+  const [draggedIndex, setDraggedIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+  const [isSavingOrder, setIsSavingOrder] = useState(false);
+
+  const handleDragStart = (e, index) => {
+    setDraggedIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+    e.dataTransfer.setData("text/plain", index.toString());
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    if (dragOverIndex !== index) {
+      setDragOverIndex(index);
+    }
+  };
+
+  const handleDragLeave = () => {
+    // Only reset if needed
+  };
+
+  const handleDrop = async (e, dropIndex) => {
+    e.preventDefault();
+    if (draggedIndex === null || draggedIndex === dropIndex) {
+      setDraggedIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+
+    const updatedProjects = [...projects];
+    const [movedItem] = updatedProjects.splice(draggedIndex, 1);
+    updatedProjects.splice(dropIndex, 0, movedItem);
+
+    // Update order_index sequentially starting from 1
+    const reordered = updatedProjects.map((item, idx) => ({
+      ...item,
+      order_index: idx + 1,
+    }));
+
+    setProjects(reordered);
+    setDraggedIndex(null);
+    setDragOverIndex(null);
+
+    // Save order to Supabase
     if (isSupabaseConfigured && isDbConnected) {
-      const { error } = await supabase.from("projects").delete().eq("id", id);
-      if (error) alert(error.message);
-      fetchProjects();
-    } else {
-      setProjects(projects.filter((p) => p.id !== id));
+      setIsSavingOrder(true);
+      try {
+        const updates = reordered.map((item) =>
+          supabase
+            .from("projects")
+            .update({ order_index: item.order_index })
+            .eq("id", item.id)
+        );
+        await Promise.all(updates);
+      } catch (err) {
+        console.error("Gagal menyimpan urutan:", err);
+      } finally {
+        setIsSavingOrder(false);
+      }
     }
   };
 
@@ -205,9 +282,17 @@ export default function AdminProjectsPage() {
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-white">Manage Projects</h1>
-          <p className="text-xs text-zinc-400">
-            Add, update, or remove portfolio case studies shown on your website.
+          <h1 className="text-2xl font-bold text-white flex items-center gap-3">
+            Manage Projects
+            {isSavingOrder && (
+              <span className="text-xs font-normal text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-1 rounded-full animate-pulse flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                Menyimpan urutan...
+              </span>
+            )}
+          </h1>
+          <p className="text-xs text-zinc-400 mt-1">
+            Tarik & geser (drag & drop) kartu proyek untuk mengatur urutan tampilan. Proyek paling atas akan tampil pertama.
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -270,65 +355,139 @@ export default function AdminProjectsPage() {
       {projects.length > 0 && (
         <div className="glass-card overflow-hidden">
           <div className="divide-y divide-white/5">
-            {projects.map((project, idx) => (
-              <div
-                key={project.id || idx}
-                className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-12 rounded-lg bg-zinc-800 border border-white/5 overflow-hidden flex-shrink-0">
-                    <img
-                      src={project.image_url}
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-white text-sm">
-                        {project.title}
-                      </h3>
-                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
-                        {project.category}
+            {projects.map((project, idx) => {
+              const isDragging = draggedIndex === idx;
+              const isOver = dragOverIndex === idx && draggedIndex !== idx;
+
+              return (
+                <div
+                  key={project.id || idx}
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, idx)}
+                  onDragOver={(e) => handleDragOver(e, idx)}
+                  onDragLeave={handleDragLeave}
+                  onDrop={(e) => handleDrop(e, idx)}
+                  onDragEnd={() => {
+                    setDraggedIndex(null);
+                    setDragOverIndex(null);
+                  }}
+                  className={`p-3.5 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4 transition-all duration-150 select-none cursor-grab active:cursor-grabbing ${
+                    isDragging
+                      ? "opacity-40 bg-white/[0.08] scale-[0.99] border-dashed border-cyan-500/40"
+                      : isOver
+                      ? "bg-cyan-500/10 border-t-2 border-cyan-400"
+                      : "hover:bg-white/[0.03]"
+                  }`}
+                >
+                  <div className="flex items-center gap-2.5 sm:gap-4 flex-1 min-w-0">
+                    {/* Drag Handle & Order Badge */}
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-zinc-500 flex-shrink-0">
+                      <div className="p-1 rounded hover:bg-white/5 cursor-grab active:cursor-grabbing text-zinc-400 hover:text-white" title="Tarik untuk memindahkan">
+                        <svg
+                          className="w-4 h-4 sm:w-5 sm:h-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 8h16M4 16h16"
+                          />
+                        </svg>
+                      </div>
+                      <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-white/5 border border-white/5 text-[10px] sm:text-[11px] font-semibold text-zinc-400 flex items-center justify-center">
+                        #{idx + 1}
                       </span>
                     </div>
-                    <p className="text-xs text-zinc-400 line-clamp-1 mt-0.5">
-                      {project.description}
-                    </p>
+
+                    {/* Thumbnail */}
+                    <div className="w-12 h-10 sm:w-16 sm:h-12 rounded-lg bg-zinc-800 border border-white/5 overflow-hidden flex-shrink-0">
+                      <img
+                        src={project.image_url}
+                        alt={project.title}
+                        className="w-full h-full object-cover pointer-events-none"
+                      />
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                        <h3 className="font-semibold text-white text-xs sm:text-sm truncate">
+                          {project.title}
+                        </h3>
+                        <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-wider px-1.5 sm:px-2 py-0.5 rounded bg-white/5 text-zinc-400 border border-white/5">
+                          {project.category}
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-zinc-400 line-clamp-1 mt-0.5">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div
+                    className="flex items-center justify-end gap-2 w-full md:w-auto pt-2 md:pt-0 border-t md:border-t-0 border-white/5 flex-shrink-0"
+                    onMouseDown={(e) => e.stopPropagation()}
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openForm(project);
+                      }}
+                      className="flex-1 md:flex-initial px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 hover:border-white/20 border border-white/5 text-xs text-zinc-300 hover:text-white transition-all font-medium text-center"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setDeletingProject(project);
+                      }}
+                      className="flex-1 md:flex-initial px-3 py-1.5 rounded-xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 hover:border-red-500/40 text-xs text-red-400 hover:text-red-300 transition-all font-medium text-center"
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
-
-                <div className="flex items-center gap-2 self-end sm:self-center">
-                  <button
-                    onClick={() => openForm(project)}
-                    className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-zinc-300 transition-colors"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(project.id)}
-                    className="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 transition-colors"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Modal Form */}
+      {/* Edit / Add Modal Form */}
       {formOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="glass-card max-w-xl w-full p-6 relative max-h-[90vh] overflow-y-auto">
-            <h2 className="text-lg font-bold text-white mb-4">
-              {editingProject ? "Edit Project" : "Add New Project"}
-            </h2>
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div 
+            className="fixed inset-0" 
+            onClick={() => setFormOpen(false)} 
+          />
+          <div className="relative z-10 bg-[#121214]/95 border border-white/10 rounded-2xl max-w-xl w-full p-6 sm:p-7 shadow-2xl shadow-black/80 max-h-[90vh] overflow-y-auto">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10">
+              <div>
+                <span className="text-[10px] font-semibold tracking-wider uppercase text-zinc-400">
+                  {editingProject ? "Project Settings" : "New Creation"}
+                </span>
+                <h2 className="text-xl font-bold text-white tracking-tight">
+                  {editingProject ? "Edit Project" : "Add New Project"}
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setFormOpen(false)}
+                className="w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center border border-white/5 transition-colors"
+              >
+                ✕
+              </button>
+            </div>
 
             <form onSubmit={handleSave} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
                   Title
                 </label>
                 <input
@@ -338,13 +497,13 @@ export default function AdminProjectsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, title: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all"
                   placeholder="e.g. Zentury"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
                   Subtitle
                 </label>
                 <input
@@ -353,46 +512,30 @@ export default function AdminProjectsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, subtitle: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all"
                   placeholder="e.g. Front-End Web Development"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-zinc-400 mb-1">
-                    Category
-                  </label>
-                  <select
-                    value={formData.category}
-                    onChange={(e) =>
-                      setFormData({ ...formData, category: e.target.value })
-                    }
-                    className="w-full px-3 py-2 rounded-xl bg-[#18181b] border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
-                  >
-                    <option value="web">Web Development</option>
-                    <option value="uiux">UI/UX Design</option>
-                    <option value="mobile">Mobile App</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-zinc-400 mb-1">
-                    Order Index
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.order_index}
-                    onChange={(e) =>
-                      setFormData({ ...formData, order_index: e.target.value })
-                    }
-                    className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
+                  Category
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#18181b] border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all"
+                >
+                  <option value="web">Web Development</option>
+                  <option value="uiux">UI/UX Design</option>
+                  <option value="mobile">Mobile App</option>
+                </select>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
                   Tech Stack (comma separated)
                 </label>
                 <input
@@ -401,7 +544,7 @@ export default function AdminProjectsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, tech_stack: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all"
                   placeholder="React, Tailwind CSS, GSAP"
                 />
               </div>
@@ -414,7 +557,7 @@ export default function AdminProjectsPage() {
               />
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
                   Demo / Live URL
                 </label>
                 <input
@@ -423,13 +566,13 @@ export default function AdminProjectsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, demo_url: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all"
                   placeholder="https://..."
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1">
+                <label className="block text-xs font-medium text-zinc-300 mb-1.5">
                   Description
                 </label>
                 <textarea
@@ -439,23 +582,67 @@ export default function AdminProjectsPage() {
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 resize-none transition-all"
+                  placeholder="Ceritakan gambaran singkat proyek ini..."
                 />
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
+              <div className="flex justify-end gap-3 pt-5 border-t border-white/10">
                 <button
                   type="button"
                   onClick={() => setFormOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-400 hover:text-white"
+                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-medium text-zinc-400 hover:text-white transition-colors"
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary py-2 px-5 text-xs">
-                  Save Project
+                <button type="submit" className="btn-primary py-2.5 px-6 text-xs">
+                  {editingProject ? "Save Changes" : "Create Project"}
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Custom Sleek Delete Confirmation Modal */}
+      {deletingProject && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div
+            className="fixed inset-0"
+            onClick={() => !isDeleting && setDeletingProject(null)}
+          />
+          <div className="relative z-10 bg-[#121214] border border-white/10 rounded-2xl max-w-md w-full p-6 shadow-2xl shadow-black/80">
+            <div className="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 flex items-center justify-center mb-4">
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+
+            <h3 className="text-lg font-bold text-white mb-1">
+              Delete Project?
+            </h3>
+            <p className="text-xs text-zinc-400 leading-relaxed mb-6">
+              Apakah Anda yakin ingin menghapus proyek <span className="text-white font-semibold">"{deletingProject.title}"</span>? Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <div className="flex items-center justify-end gap-3">
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={() => setDeletingProject(null)}
+                className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/5 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={handleDeleteConfirm}
+                className="px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white text-xs font-semibold shadow-lg shadow-red-500/20 transition-all flex items-center gap-2"
+              >
+                {isDeleting ? "Deleting..." : "Delete Project"}
+              </button>
+            </div>
           </div>
         </div>
       )}

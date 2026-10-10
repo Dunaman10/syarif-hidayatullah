@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { supabase, isSupabaseConfigured } from "@/lib/supabase";
 import { initialProfile } from "@/lib/mockData";
+import FileUpload from "@/components/FileUpload";
 
 export default function AdminProfilePage() {
   const [profile, setProfile] = useState(initialProfile);
@@ -107,35 +108,29 @@ export default function AdminProfilePage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1">
-              Contact Email
-            </label>
-            <input
-              type="email"
-              required
-              value={profile.email || ""}
-              onChange={(e) =>
-                setProfile({ ...profile, email: e.target.value })
-              }
-              className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white focus:outline-none"
-            />
-          </div>
+        <div>
+          <label className="text-xs font-semibold text-zinc-300 block mb-1">
+            Contact Email
+          </label>
+          <input
+            type="email"
+            required
+            value={profile.email || ""}
+            onChange={(e) =>
+              setProfile({ ...profile, email: e.target.value })
+            }
+            className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white focus:outline-none"
+          />
+        </div>
 
-          <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1">
-              CV File URL / Path
-            </label>
-            <input
-              type="text"
-              value={profile.cv_url || ""}
-              onChange={(e) =>
-                setProfile({ ...profile, cv_url: e.target.value })
-              }
-              className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-sm text-white focus:outline-none"
-            />
-          </div>
+        <div className="pt-2">
+          <FileUpload
+            label="Curriculum Vitae (CV) - PDF File"
+            folder="cv"
+            accept=".pdf,application/pdf"
+            value={profile.cv_url || ""}
+            onChange={(url) => setProfile({ ...profile, cv_url: url })}
+          />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

@@ -137,23 +137,24 @@ const Navbar = ({ profile }) => {
             </a>
 
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="relative w-10 h-10 flex items-center justify-center rounded-xl glass-subtle z-[60]"
+              type="button"
+              onClick={() => setIsOpen((prev) => !prev)}
+              className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 active:scale-95 transition-all z-[70] cursor-pointer"
               aria-label="Toggle menu"
             >
-              <div className="flex flex-col gap-1.5 items-center justify-center w-5">
+              <div className="flex flex-col gap-1.5 items-center justify-center w-5 pointer-events-none">
                 <span
-                  className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 origin-center ${
                     isOpen ? "rotate-45 translate-y-2" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 ${
+                  className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 ${
                     isOpen ? "opacity-0 scale-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full bg-[var(--color-text-primary)] rounded-full transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full bg-white rounded-full transition-all duration-300 origin-center ${
                     isOpen ? "-rotate-45 -translate-y-2" : ""
                   }`}
                 />
@@ -214,62 +215,82 @@ const Navbar = ({ profile }) => {
         onClick={() => setIsOpen(false)}
       />
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Drawer */}
       <div
         ref={menuRef}
         className={`mobile-menu sm:hidden ${isOpen ? 'active' : ''}`}
       >
-        <div className="flex flex-col h-full p-6">
-          <div className="flex justify-between items-center mb-10 pt-2">
-            <span className="text-[var(--color-accent)] font-semibold text-sm uppercase tracking-wider">
-              Navigation
-            </span>
+        <div className="flex flex-col h-full p-6 justify-between">
+          <div>
+            {/* Drawer Header with Title and Close Button */}
+            <div className="flex justify-between items-center pb-5 mb-6 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-lg text-white">
+                  Syarif<span className="text-[var(--color-accent)]">.</span>
+                </span>
+                <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">
+                  Menu
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="w-9 h-9 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center transition-colors"
+                aria-label="Close menu"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Nav Items */}
+            <ul className="flex flex-col gap-2">
+              {navItems.map((item, index) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => handleNavClick(e, item.id)}
+                      className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-200 ${
+                        isActive
+                          ? "bg-[var(--color-accent-muted)] text-[var(--color-accent)] font-semibold border border-[var(--color-accent)]/20"
+                          : "text-zinc-400 hover:bg-white/5 hover:text-white"
+                      }`}
+                    >
+                      <span className="text-base">{item.label}</span>
+                      <span className={`text-xs font-mono ${isActive ? "text-[var(--color-accent)]" : "text-zinc-600"}`}>
+                        0{index + 1}
+                      </span>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
-          <ul className="flex flex-col gap-2 flex-1">
-            {navItems.map((item, index) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={`flex items-center gap-4 px-4 py-4 rounded-xl transition-all duration-300 ${
-                    activeSection === item.id
-                      ? "bg-[var(--color-accent-muted)] text-[var(--color-accent)]"
-                      : "text-[var(--color-text-secondary)] hover:bg-[rgba(255,255,255,0.05)] hover:text-[var(--color-text-primary)]"
-                  }`}
-                >
-                  <span className="text-xs font-medium text-[var(--color-accent)] opacity-60 w-6">
-                    0{index + 1}
-                  </span>
-                  <span className="text-lg font-medium">{item.label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="pt-6 border-t border-[rgba(255,255,255,0.08)]">
+          {/* Drawer Footer with CV Download */}
+          <div className="pt-6 border-t border-white/10 mt-6">
             <a
               href={cvLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary w-full justify-center"
+              className="btn-primary w-full justify-center py-3 text-sm flex items-center gap-2 shadow-lg"
               onClick={() => setIsOpen(false)}
             >
               <span>Download CV</span>
               <svg
-                width="18"
-                height="18"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                <path
-                  d="M7 17L17 7M17 7H7M17 7V17"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
               </svg>
             </a>
           </div>
