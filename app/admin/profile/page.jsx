@@ -17,7 +17,9 @@ export default function AdminProfilePage() {
         const { data } = await supabase
           .from("site_settings")
           .select("*")
-          .single();
+          .order("updated_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
         if (data) setProfile(data);
       } catch (e) {
         console.warn(e);
@@ -33,9 +35,47 @@ export default function AdminProfilePage() {
 
     if (isSupabaseConfigured) {
       try {
-        await supabase
-          .from("site_settings")
-          .upsert({ ...profile, updated_at: new Date() });
+        const payload = { ...profile, updated_at: new Date().toISOString() };
+
+        let result;
+        if (profile.id) {
+          result = await supabase
+            .from("site_settings")
+            .update(payload)
+            .eq("id", profile.id)
+            .select()
+            .single();
+        } else {
+          // Pastikan cek lagi apakah sudah ada baris di database sebelum insert baru
+          const { data: existing } = await supabase
+            .from("site_settings")
+            .select("id")
+            .order("updated_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          if (existing?.id) {
+            result = await supabase
+              .from("site_settings")
+              .update(payload)
+              .eq("id", existing.id)
+              .select()
+              .single();
+          } else {
+            result = await supabase
+              .from("site_settings")
+              .insert([payload])
+              .select()
+              .single();
+          }
+        }
+
+        if (result.error) {
+          throw result.error;
+        }
+        if (result.data) {
+          setProfile(result.data);
+        }
         setSaved(true);
       } catch (err) {
         alert("Failed to save settings: " + err.message);

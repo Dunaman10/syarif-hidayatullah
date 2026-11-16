@@ -85,6 +85,7 @@ CREATE POLICY "Allow public read-only access on certificate_categories" ON certi
 CREATE POLICY "Allow public read-only access on certificates" ON certificates FOR SELECT USING (true);
 
 -- Anon WRITE policy (admin login via demo session)
+CREATE POLICY "Allow anon write on site_settings" ON site_settings FOR ALL TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "Allow anon write on skills" ON skills FOR ALL TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "Allow anon write on projects" ON projects FOR ALL TO anon USING (true) WITH CHECK (true);
 CREATE POLICY "Allow anon write on certificate_categories" ON certificate_categories FOR ALL TO anon USING (true) WITH CHECK (true);

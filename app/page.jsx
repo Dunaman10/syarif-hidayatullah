@@ -31,11 +31,13 @@ export default function Page() {
       }
 
       try {
-        // Fetch Profile / Settings
+        // Fetch Profile / Settings (ambil baris terbaru)
         const { data: profileData } = await supabase
           .from("site_settings")
           .select("*")
-          .single();
+          .order("updated_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
         if (profileData) setProfile(profileData);
 
         // Fetch Projects

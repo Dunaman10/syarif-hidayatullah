@@ -246,17 +246,23 @@ const Home = ({ profile }) => {
               </a>
             </div>
 
-            <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8 max-w-xl text-justify">
-              Detail-oriented{" "}
-              <span className="font-medium text-[var(--color-text-primary)]">
-                Web Developer
-              </span>{" "}
-              with hands-on experience building scalable applications. Skilled in
-              end-to-end development, from database architecture to{" "}
-              <span className="text-white">UI/UX implementation</span>, with a
-              strong focus on delivering efficient solutions for business and
-              academic needs.
-            </p>
+            {profile?.bio ? (
+              <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8 max-w-xl text-justify">
+                {profile.bio}
+              </p>
+            ) : (
+              <p className="text-[var(--color-text-secondary)] text-lg leading-relaxed mb-8 max-w-xl text-justify">
+                Detail-oriented{" "}
+                <span className="font-medium text-[var(--color-text-primary)]">
+                  Web Developer
+                </span>{" "}
+                with hands-on experience building scalable applications. Skilled in
+                end-to-end development, from database architecture to{" "}
+                <span className="text-white">UI/UX implementation</span>, with a
+                strong focus on delivering efficient solutions for business and
+                academic needs.
+              </p>
+            )}
 
             <a
               href="#portfolio"
